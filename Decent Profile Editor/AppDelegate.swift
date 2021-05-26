@@ -1,9 +1,6 @@
-//
 //  AppDelegate.swift
 //  Decent Profile Editor
-//
-//  Created by bob on 5/15/2021.
-//
+
 
 import Cocoa
 import SwiftUI
