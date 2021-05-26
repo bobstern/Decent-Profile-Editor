@@ -27,7 +27,6 @@ struct Profile {
         self.stepDictsArray = stepDictsArrayDecode(from: inputTcl)
         self.shotSteps = shotStepObjects(from: self.stepDictsArray)
        
-        // self.profileTitle = profileTitleDecode(from: inputTcl)
         self.profileDict = profileDictDecode(from: inputTcl)
         // print("PROFILE DEBUG " + self.profileDict.debugDescription)
         self.profileTitle = self.profileDict["profile_title"] ?? ""
