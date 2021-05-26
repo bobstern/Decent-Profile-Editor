@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C42260C8265DC71F007800BE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42260C7265DC71F007800BE /* Utilities.swift */; };
 		C49B2A3C2650B98C007C3849 /* System Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B2A3B2650B98C007C3849 /* System Globals.swift */; };
 		C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E182650B17400CB518B /* AppDelegate.swift */; };
 		C4CE9E1D2650B17500CB518B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E1C2650B17500CB518B /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
 		C49B2A3B2650B98C007C3849 /* System Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "System Globals.swift"; sourceTree = "<group>"; };
 		C4CE9E152650B17400CB518B /* Decent Profile Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Decent Profile Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CE9E182650B17400CB518B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				C4CE9E182650B17400CB518B /* AppDelegate.swift */,
 				C49B2A3B2650B98C007C3849 /* System Globals.swift */,
+				C42260C7265DC71F007800BE /* Utilities.swift */,
 				C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */,
 				C4CE9E3F2650B27900CB518B /* Model */,
 				C4CE9E422650B27900CB518B /* User Actions */,
@@ -201,6 +204,7 @@
 				C4CE9E382650B20800CB518B /* Steps View.swift in Sources */,
 				C4CE9E462650B27900CB518B /* Profile.swift in Sources */,
 				C49B2A3C2650B98C007C3849 /* System Globals.swift in Sources */,
+				C42260C8265DC71F007800BE /* Utilities.swift in Sources */,
 				C4CE9E3A2650B20800CB518B /* ContentView.swift in Sources */,
 				C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,

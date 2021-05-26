@@ -85,8 +85,8 @@ struct Profile {
             var newStep = ShotStep(pumpType: PumpTypes(rawValue: stepDict["pump"]!)!)
 
             newStep.descrip = stepDict["name"] ?? ""
-            newStep.temp = stepDict["temperature"]!
-            newStep.time = stepDict["seconds"]!
+            newStep.temp = rnd( stepDict["temperature"]! )
+            newStep.time = rnd( stepDict["seconds"]! )
             // print (newStep.temp + "   " + newStep.time)
 
             if stepDict["transition"]! != "fast" {
@@ -99,6 +99,7 @@ struct Profile {
             case .flow :
                 newStep.pumpVal = stepDict["flow"]!
             }
+            newStep.pumpVal = rnd(newStep.pumpVal)
 
             if stepDict["exit_if"] == "1" {
                 newStep.exitType = ExitTypes(rawValue: stepDict["exit_type"]!)!
@@ -115,6 +116,7 @@ struct Profile {
             case.flow_under :
                 newStep.exitVal = stepDict["exit_flow_under"]!
             }
+            newStep.exitVal = rnd(newStep.exitVal)
 
             shotStepObjectArray.append(newStep)
             // print("Step \(stepN);  Pump: \(newStep.pumpDisplay);  Exit: \(newStep.exitDisplay)")
