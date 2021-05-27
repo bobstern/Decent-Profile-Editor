@@ -17,11 +17,11 @@ struct StepsView : View {
                 HStack {
                     Group {
                         Text(String(idx+1)).frame(width: 66, alignment: .trailing).padding(.trailing, 10)
-                        TextField("", text: stepBinding.descrip).frame(width: 320, alignment: .leading)
+                        TextField("", text: stepBinding.descrip).multilineTextAlignment(.leading).frame(width: 320)
                         
                         /// Temperature
                         Text("°C").padding(.leading, 30)
-                        TextField("", text: stepBinding.temp).frame(width: 55)
+                        TextField("", text: stepBinding.temp).frame(width: 44)
                         
                         Spacer().frame(width: 60)
                         
@@ -38,12 +38,12 @@ struct StepsView : View {
                                 Text(choice.rawValue)
                             }
                         }.frame(width: 120, alignment: .trailing)
-                        TextField("", text: stepBinding.pumpVal).frame(width: 55)
+                        TextField("", text: stepBinding.pumpVal).frame(width: 44)
                     }
                 
                     // Time
                     Text("sec").frame(width: 80, alignment: .trailing)
-                    TextField("", text: stepBinding.time).frame(width: 55, alignment: .leading)
+                    TextField("", text: stepBinding.time).frame(width: 44)
                     
                     Spacer().frame(width: 60)
                     
@@ -59,7 +59,7 @@ struct StepsView : View {
                         if vm.newProfile.shotSteps[idx].exitType == .zero {
                             EmptyView()
                             } else {
-                                TextField("", text: stepBinding.exitVal).frame(width: 55, alignment: .leading).padding(.trailing, 8)
+                                TextField("", text: stepBinding.exitVal).frame(width: 44, alignment: .center).padding(.trailing, 8)
                         }
                     }.frame(width: 100, alignment: .leading) // aligns buttons at right
                 
@@ -78,7 +78,7 @@ struct StepsView : View {
                         )
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
-                }.frame(height: 40) // end HStack
+                }.multilineTextAlignment(.center).frame(height: 40) // end HStack
                 
                 // "Swap" button = row alternating w/ preceding HStack:
                 if idx < vm.newProfile.shotSteps.count-1 {
@@ -111,7 +111,7 @@ struct StepsView : View {
                 //.onMove{moveStep(from: $0, dest: $1) }
 
         } // end VStack
-            .frame(minWidth: 1400, alignment: .leading).padding(.vertical, 12) // Space above 1st row only.
+            .frame(minWidth: 1400).padding(.vertical, 12) // Space above 1st row only.
     } // body
 }
 

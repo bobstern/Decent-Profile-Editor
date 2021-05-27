@@ -26,7 +26,7 @@ struct ProfileParametersView: View {
             
             HStack {
                 Text("Stop at Volume (0 = Off):").padding(.trailing, -4)//.frame(width: 250, alignment: .trailing)
-                TextField("", text: $vm.newProfile.stopVolume).multilineTextAlignment(.center).frame(width: 70)
+                TextField("", text: $vm.newProfile.stopVolume).multilineTextAlignment(.trailing).frame(width: 45)
                 Spacer()
                 Text("Pressure target dampening range:").frame(width: 300, alignment: .trailing).padding(.trailing, -4)
                 TextField("", text: $vm.newProfile.press_dampen_range).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
