@@ -31,10 +31,10 @@ struct ContentView: View {
             Divider().frame(height: 1.5).background(Color.black) // height=thickness
             
 /// Shot Steps:
-
             StepsView(vm: vm)
+
         } // ContentView outermost VStack
-        .frame(minWidth: 1460, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+        .frame(minWidth: 1400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
         .padding(.leading, 8)
         .padding(.top, 20)
         .font(Font.system(size: 18))
