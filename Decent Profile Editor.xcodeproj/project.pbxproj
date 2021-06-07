@@ -27,6 +27,7 @@
 /* Begin PBXFileReference section */
 		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
 		C49B2A3B2650B98C007C3849 /* System Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "System Globals.swift"; sourceTree = "<group>"; };
+		C4C9640F266B900F00CAC5E1 /* Decent Profile EditorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Decent Profile EditorRelease.entitlements"; sourceTree = "<group>"; };
 		C4CE9E152650B17400CB518B /* Decent Profile Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Decent Profile Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CE9E182650B17400CB518B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4CE9E1C2650B17500CB518B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -85,8 +86,9 @@
 				C4CE9E212650B17500CB518B /* Main.storyboard */,
 				C4CE9E1C2650B17500CB518B /* Assets.xcassets */,
 				C4CE9E242650B17500CB518B /* Info.plist */,
-				C4CE9E252650B17500CB518B /* Decent_Profile_Editor.entitlements */,
 				C4CE9E1E2650B17500CB518B /* Preview Content */,
+				C4CE9E252650B17500CB518B /* Decent_Profile_Editor.entitlements */,
+				C4C9640F266B900F00CAC5E1 /* Decent Profile EditorRelease.entitlements */,
 			);
 			path = "Decent Profile Editor";
 			sourceTree = "<group>";
@@ -351,6 +353,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Decent Profile Editor/Decent_Profile_Editor.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Decent Profile Editor/Preview Content\"";
 				DEVELOPMENT_TEAM = 5X5V4KYDLV;
 				ENABLE_HARDENED_RUNTIME = NO;
@@ -372,9 +375,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Decent Profile Editor/Decent_Profile_Editor.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Decent Profile Editor/Decent Profile EditorRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Decent Profile Editor/Preview Content\"";
 				DEVELOPMENT_TEAM = 5X5V4KYDLV;
 				ENABLE_HARDENED_RUNTIME = NO;
