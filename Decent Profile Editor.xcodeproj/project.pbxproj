@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C42260C8265DC71F007800BE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42260C7265DC71F007800BE /* Utilities.swift */; };
+		C45722C926F6EE2A00A443CF /* ForEach Bug Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45722C826F6EE2A00A443CF /* ForEach Bug Fix.swift */; };
 		C49B2A3C2650B98C007C3849 /* System Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B2A3B2650B98C007C3849 /* System Globals.swift */; };
 		C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E182650B17400CB518B /* AppDelegate.swift */; };
 		C4CE9E1D2650B17500CB518B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E1C2650B17500CB518B /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
+		C45722C826F6EE2A00A443CF /* ForEach Bug Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ForEach Bug Fix.swift"; path = "Views/ForEach Bug Fix.swift"; sourceTree = "<group>"; };
 		C49B2A3B2650B98C007C3849 /* System Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "System Globals.swift"; sourceTree = "<group>"; };
 		C4C9640F266B900F00CAC5E1 /* Decent Profile EditorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Decent Profile EditorRelease.entitlements"; sourceTree = "<group>"; };
 		C4CE9E152650B17400CB518B /* Decent Profile Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Decent Profile Editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,7 @@
 		C4CE9E172650B17400CB518B /* Decent Profile Editor */ = {
 			isa = PBXGroup;
 			children = (
+				C45722C826F6EE2A00A443CF /* ForEach Bug Fix.swift */,
 				C4CE9E182650B17400CB518B /* AppDelegate.swift */,
 				C49B2A3B2650B98C007C3849 /* System Globals.swift */,
 				C42260C7265DC71F007800BE /* Utilities.swift */,
@@ -209,6 +212,7 @@
 				C42260C8265DC71F007800BE /* Utilities.swift in Sources */,
 				C4CE9E3A2650B20800CB518B /* ContentView.swift in Sources */,
 				C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */,
+				C45722C926F6EE2A00A443CF /* ForEach Bug Fix.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,
 				C4CE9E472650B27900CB518B /* Shot Step.swift in Sources */,
 				C4CE9E362650B20800CB518B /* ProfileParameters View.swift in Sources */,

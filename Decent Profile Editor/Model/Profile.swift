@@ -8,6 +8,7 @@ struct Profile {
     private var stepDictsArray : Array<[String:String]> = [] // To Do: convert to computed var.
     var shotContainerPath = ""
     var shotSteps : Array<ShotStep> = []
+    var stepsCount : Int {shotSteps.count}
     var profileDict : [String:String] = [:]
     var profileTitle = ""
     var profileNotes = ""
