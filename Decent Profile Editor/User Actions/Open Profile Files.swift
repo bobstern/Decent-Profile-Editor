@@ -9,7 +9,13 @@ func shotFilesOpenDialog() {
     let openPanel = NSOpenPanel()
     openPanel.allowedFileTypes = ["tcl", "shot"]
     openPanel.allowsMultipleSelection = false
-    openPanel.runModal()
+    let openPanelResponse = openPanel.runModal()
+    
+    // Xcode BUG: Freezes if press Cancel, so must test app outside Xcode.
+    // TO DO:  Need to test whether press Cancel button;
+    // so loads selected file as if you'd pressed OK!
+    guard openPanelResponse == .OK else {return}
+    
     let shotFileURL = openPanel.urls[0]
     var shotPathArray = shotFileURL.path.components(separatedBy: "/")
     _ = shotPathArray.removeLast()

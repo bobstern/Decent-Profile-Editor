@@ -6,17 +6,20 @@ import SwiftUI
 
 struct StepsView : View {
     @ObservedObject var vm : ViewModel
-    @State private var deleteStepAlert = false
-    @State private var actionIdx : Int?  // used by Delete alert dialog.
+    @Binding var deleteStepAlert : Bool
+    @Binding var actionIdx : Int?  // used by Delete alert dialog.
     
     var body: some View {
         ScrollView {
             ForEach(Array(vm.newProfile.shotSteps.enumerated()), id: \.element.id) { (idx, step) in
-            
-                let stepBinding = $vm.newProfile.shotSteps[idx]
                 
-                // work around ForEach crashing bug when deleting last step:
-                if idx < vm.newProfile.stepsCount {
+                StepViewBuilder(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx, idx: idx)
+                
+/*
+//                // failed to solve ForEach crashing bug when deleting last step:
+//                if idx < vm.newProfile.stepsCount {
+                
+                    let stepBinding = $vm.newProfile.shotSteps[idx]
                 
                     // HStack has all UX elements except Swap button:
                     HStack {
@@ -93,29 +96,20 @@ struct StepsView : View {
                                 .padding(.leading, 10)
                                 .frame(height: 40)
                                 .buttonStyle(PlainButtonStyle()) // no border
+
                             Spacer()
                         }
                     }
-                } // end if idx < count
+                // } // end if idx < count
+                
+                
+                
+*/
             } // end ForEach
-            .alert(isPresented: $deleteStepAlert) {
-                Alert(
-                    title: Text("Delete step \(actionIdx! + 1)?"),
-                    message: nil,
-                    primaryButton: .default(
-                        Text("Cancel"),
-                        action: {}
-                    ),
-                    secondaryButton: .destructive(
-                        Text("Delete"),
-                        action: {deleteStep(atIndex: actionIdx!)}
-                    )
-                )
-            }
             // onMove works only in List, but List disables editing TextFields.
             //.onMove{moveStep(from: $0, dest: $1) }
             
-        } // end VStack
+        } // end Scroll View
         .frame(minWidth: 1400).padding(.vertical, 12) // Space above 1st row only.
     } // body
 }

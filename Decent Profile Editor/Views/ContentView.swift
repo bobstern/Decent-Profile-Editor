@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var vm : ViewModel
+    @State private var actionIdx : Int?
+    @State private var deleteStepAlert = false
 
     var body: some View {
 //        let newSteps = vm.newProfile.shotSteps
@@ -31,7 +33,11 @@ struct ContentView: View {
             Divider().frame(height: 1.5).background(Color.black) // height=thickness
             
 /// Shot Steps:
-            StepsView(vm: vm)
+            if vm.deleteBugBlankDisplay == true {
+                Text("")
+            } else {
+                StepsView(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx)
+            }
 
         } // ContentView outermost VStack
         .frame(minWidth: 1400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
@@ -49,6 +55,23 @@ struct ContentView: View {
                 secondaryButton: .destructive(
                     Text("Replace"),
                     action: {tclSaveImmediately()}
+                )
+            )
+        }
+        .alert(isPresented: $deleteStepAlert) {
+            Alert(
+                title: Text("Delete step \(actionIdx! + 1)?"),
+                message: nil,
+                primaryButton: .default(
+                    Text("Cancel"),
+                    action: {}
+                ),
+                secondaryButton: .destructive(
+                    Text("Delete"),
+                    action: {
+                        // vm.deleteBugBlankDisplay = true // fails to fix crash if delete last row.
+                        deleteStep(atIndex: actionIdx!)
+                    }
                 )
             )
         }

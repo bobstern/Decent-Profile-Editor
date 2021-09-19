@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		527BB09626F72F2E006E138C /* Step View Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527BB09526F72F2E006E138C /* Step View Builder.swift */; };
 		C42260C8265DC71F007800BE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42260C7265DC71F007800BE /* Utilities.swift */; };
 		C45722C926F6EE2A00A443CF /* ForEach Bug Fix.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45722C826F6EE2A00A443CF /* ForEach Bug Fix.swift */; };
 		C49B2A3C2650B98C007C3849 /* System Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B2A3B2650B98C007C3849 /* System Globals.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		527BB09526F72F2E006E138C /* Step View Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Step View Builder.swift"; sourceTree = "<group>"; };
 		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
 		C45722C826F6EE2A00A443CF /* ForEach Bug Fix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ForEach Bug Fix.swift"; path = "Views/ForEach Bug Fix.swift"; sourceTree = "<group>"; };
 		C49B2A3B2650B98C007C3849 /* System Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "System Globals.swift"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				C4CE9E302650B20800CB518B /* ProfileParameters View.swift */,
 				C4CE9E332650B20800CB518B /* Steps View.swift */,
+				527BB09526F72F2E006E138C /* Step View Builder.swift */,
 				C4CE9E352650B20800CB518B /* ContentView.swift */,
 			);
 			path = Views;
@@ -160,7 +163,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					C4CE9E142650B17400CB518B = {
 						CreatedOnToolsVersion = 12.4;
@@ -215,6 +218,7 @@
 				C45722C926F6EE2A00A443CF /* ForEach Bug Fix.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,
 				C4CE9E472650B27900CB518B /* Shot Step.swift in Sources */,
+				527BB09626F72F2E006E138C /* Step View Builder.swift in Sources */,
 				C4CE9E362650B20800CB518B /* ProfileParameters View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,7 +291,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -355,6 +359,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Decent Profile Editor/Decent_Profile_Editor.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;

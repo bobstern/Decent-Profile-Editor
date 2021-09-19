@@ -16,6 +16,7 @@ class ViewModel : ObservableObject {
     @Published var overwriteFileAlert = false
     @Published var overwriteFilePath = ""
     @Published var dirty = false
+    @Published var deleteBugBlankDisplay = false
     var saveButtonTxt : String {
         switch dirty {
         case true:
@@ -26,6 +27,8 @@ class ViewModel : ObservableObject {
     }
     // @Published var overwriteFileConfirmed = false
     // @Published var currentStep = ShotStep()
+    
+    var dummyShotStep = ShotStep()
 
     
     func setDirty() {
