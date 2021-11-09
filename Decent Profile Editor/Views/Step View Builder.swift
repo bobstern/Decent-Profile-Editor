@@ -40,7 +40,7 @@ struct StepViewBuilder: View {
     var body: some View {
         let stepBinding = stepBindingSafe(idx: idx) // $vm.newProfile.shotSteps[idx]
         
-        if idx < vm.newProfile.shotSteps.count {
+        if idx < vm.newProfile.shotSteps.count { // fix out of range error for button views.
             // HStack has all UX elements except Swap button:
             HStack {
                 Group {
