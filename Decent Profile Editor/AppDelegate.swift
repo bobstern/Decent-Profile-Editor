@@ -14,8 +14,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the window contents.
         dateFormatter.dateFormat = "yyyy-MM-dd 'T'HHmm"
-        shotFilesOpenDialog()
-        let contentView = ContentView(vm: vm)
+        // shotFilesOpenDialog() // Move to window init for multi-window.
+        let contentView = MasterView() // First View.
 
         // Create the window and set the content view.
         window = NSWindow(
@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.isReleasedWhenClosed = false
         window.center()
         window.setFrameAutosaveName("Main Window")
+        // First View:
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
     }

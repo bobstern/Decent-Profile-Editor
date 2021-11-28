@@ -3,23 +3,25 @@
 
 import Cocoa
 
+extension ViewModel {
+
 func clipboardExportTcl() {
-    // let tcl = profileEncodeTcl(vm.newProfile)
-    let tcl = vm.newProfile.encodeTcl()
+    // let tcl = profileEncodeTcl(self.newProfile)
+    let tcl = self.newProfile.encodeTcl()
     NSPasteboard.general.setString(tcl, forType: .string)
 //    clipboard.clearContents()
 //    clipboard.setString(tcl, forType: .string)
 }
 
 func tclSavePanel() {
-    // let tcl = profileEncodeTcl(vm.newProfile)
-    let tcl = vm.newProfile.encodeTcl()
+    // let tcl = profileEncodeTcl(self.newProfile)
+    let tcl = self.newProfile.encodeTcl()
 //    clipboard.clearContents()
-//    clipboard.setString(vm.newProfile.profileTitle+".tcl", forType: .string)
+//    clipboard.setString(self.newProfile.profileTitle+".tcl", forType: .string)
     
-    var saveNameOffered = "\(vm.newProfile.profileTitle).tcl"
-    if filemgr.fileExists(atPath: vm.newProfile.shotContainerPath + saveNameOffered) {
-        saveNameOffered = "\(vm.newProfile.profileTitle)  (\(dateFormatter.string(from: Date())))"
+    var saveNameOffered = "\(self.newProfile.profileTitle).tcl"
+    if filemgr.fileExists(atPath: self.newProfile.shotContainerPath + saveNameOffered) {
+        saveNameOffered = "\(self.newProfile.profileTitle)  (\(dateFormatter.string(from: Date())))"
     }
     let savePanel = NSSavePanel()
     savePanel.allowedFileTypes = ["tcl"]
@@ -33,22 +35,23 @@ func tclSavePanel() {
     guard let savePath = savePanel.url?.path else {return}
     // Don't interfere cuz overwrite warning already in Save dialog:
 //    if filemgr.fileExists(atPath: savePath) {
-//        vm.overwriteFilePath = savePath
-//        //vm.overwriteFileConfirmed = false
-//        vm.overwriteFileAlert = true
+//        self.overwriteFilePath = savePath
+//        //self.overwriteFileConfirmed = false
+//        self.overwriteFileAlert = true
 //    } else {
 //        filemgr.createFile(atPath: savePath, contents: Data(tcl.utf8))
 //    }
     filemgr.createFile(atPath: savePath, contents: Data(tcl.utf8))
-    vm.dirty = false
+    self.dirty = false
 }
 
 func tclSaveImmediately() {
-    // vm.overwriteFileConfirmed = false
-    // let tcl = profileEncodeTcl(vm.newProfile)
-    let tcl = vm.newProfile.encodeTcl()
-    filemgr.createFile(atPath: vm.overwriteFilePath, contents: Data(tcl.utf8))
-    vm.dirty = false
+    // self.overwriteFileConfirmed = false
+    // let tcl = profileEncodeTcl(self.newProfile)
+    let tcl = self.newProfile.encodeTcl()
+    filemgr.createFile(atPath: self.overwriteFilePath, contents: Data(tcl.utf8))
+    self.dirty = false
 }
 
 
+}

@@ -7,7 +7,8 @@ import Cocoa
 struct Profile {
     private var stepDictsArray : Array<[String:String]> = [] // To Do: convert to computed var.
     var shotContainerPath = ""
-    var shotSteps : Array<ShotStep> = []
+//    var shotSteps : Array<ShotStep> = []
+    var shotSteps = [ShotStep]() // init w one step
     var stepsCount : Int {shotSteps.count}
     var profileDict : [String:String] = [:]
     var profileTitle = ""
@@ -18,6 +19,9 @@ struct Profile {
     var flow_dampen_range = "0.1" // key = maximum_flow_range_advanced
     var tank_desired_water_temperature = "0"
     var stopVolume = "0"
+    
+    init() {
+    }
     
     init(fromTcl inputTcl: String, shotContainerPath: String) {
         self.init(fromTcl: inputTcl)
@@ -37,8 +41,6 @@ struct Profile {
         self.stopVolume = self.profileDict["final_desired_shot_volume_advanced"] ?? "0"
     }
     
-    init() {
-    }
     
     func encodeTcl (toClipboard: Bool = false) -> String {
         var tcl = "advanced_shot {"

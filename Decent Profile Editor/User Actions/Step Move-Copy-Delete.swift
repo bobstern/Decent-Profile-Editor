@@ -3,15 +3,17 @@
 
 import Foundation
 
+extension ViewModel {
+
 func duplicateStep(atIndex idx : Int) {
-    let originalStep = vm.newProfile.shotSteps[idx]
+    let originalStep = self.newProfile.shotSteps[idx]
     var duplicateStep = originalStep
     duplicateStep.id = UUID()
-    vm.newProfile.shotSteps.insert(duplicateStep, at: idx)
+    self.newProfile.shotSteps.insert(duplicateStep, at: idx)
 }
 
 func deleteStep(atIndex idx : Int) {
-    vm.newProfile.shotSteps.remove(at: idx)
+    self.newProfile.shotSteps.remove(at: idx)
 }
 
 // onMove fails in Catalina:
@@ -20,6 +22,7 @@ func deleteStep(atIndex idx : Int) {
 // }
 
 func moveDownOneStep(fromIndex: Int) {
-    let firstElement = vm.newProfile.shotSteps.remove(at: fromIndex)
-    vm.newProfile.shotSteps.insert(firstElement, at: fromIndex+1)
+    let firstElement = self.newProfile.shotSteps.remove(at: fromIndex)
+    self.newProfile.shotSteps.insert(firstElement, at: fromIndex+1)
+}
 }

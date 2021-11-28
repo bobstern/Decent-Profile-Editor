@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct ContentView: View {
+let profileViewTemp = ProfileView(vm: ViewModel() )
+
+struct ProfileView: View {
     @ObservedObject var vm : ViewModel
     @State private var actionIdx : Int?
     @State private var deleteStepAlert = false
@@ -17,12 +19,12 @@ struct ContentView: View {
 //        let newBind = $vm.newProfile.shotSteps
         VStack(alignment: .leading, spacing: 20) {
             HStack {
-                Button("Open Another Profile") {shotFilesOpenDialog()}.padding(.leading, 8)
+                Button("Open Another Profile") {vm.shotFilesOpenDialog()}.padding(.leading, 8)
                 Button("Copy to Clipboard") {_ = vm.newProfile.encodeTcl(toClipboard: true)}.padding(.leading, 30)
                 if vm.dirty {
-                    Button("**SAVE**") {tclSavePanel()}.padding(.leading, 30).font(Font.system(size: 18, weight: .bold)) //.foregroundColor(.red) // Red distracting.
+                    Button("**SAVE**") {vm.tclSavePanel()}.padding(.leading, 30).font(Font.system(size: 18, weight: .bold)) //.foregroundColor(.red) // Red distracting.
                 } else {
-                    Button("  Save  ", action: {tclSavePanel()}).padding(.leading, 30).font(Font.system(size: 18))
+                    Button("  Save  ", action: {vm.tclSavePanel()}).padding(.leading, 30).font(Font.system(size: 18))
                 }
                 Spacer()
             }
@@ -54,7 +56,7 @@ struct ContentView: View {
                 ),
                 secondaryButton: .destructive(
                     Text("Replace"),
-                    action: {tclSaveImmediately()}
+                    action: {vm.tclSaveImmediately()}
                 )
             )
         }
@@ -70,7 +72,7 @@ struct ContentView: View {
                     Text("Delete"),
                     action: {
                         // vm.deleteBugBlankDisplay = true // fails to fix crash if delete last row.
-                        deleteStep(atIndex: actionIdx!)
+                        vm.deleteStep(atIndex: actionIdx!)
                     }
                 )
             )
@@ -82,8 +84,8 @@ struct ContentView: View {
 
 
 // Preview omits sub-views:
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(vm: vm)
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView(vm: vm)
+//    }
+//}

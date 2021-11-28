@@ -41,8 +41,8 @@ struct ProfileParametersView: View {
 
 
 // Preview omits sub-views:
-struct ProfileParametersView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileParametersView(vm: vm)
-    }
-}
+//struct ProfileParametersView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileParametersView(vm: vm)
+//    }
+//}

@@ -4,6 +4,8 @@
 
 import Cocoa
 
+extension ViewModel {
+
 func shotFilesOpenDialog() {
     // var shotTSVandHeadingConcatenated = "" // for export to TSV.
     let openPanel = NSOpenPanel()
@@ -24,10 +26,10 @@ func shotFilesOpenDialog() {
     guard (shotFileURL.pathExtension == "tcl") || (shotFileURL.pathExtension == "shot") else {return}
     // url contents = nil if user canceled open dialog:
     guard let shotInputTcl = try? String(contentsOf: shotFileURL) else {return}
-    // vm.oldProfile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
-    vm.newProfile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
-    // vm.newProfile.inputFileName = shotFileURL.lastPathComponent // includes extension
-    vm.dirty =  false
+    // self.oldProfile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
+    self.newProfile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
+    // self.newProfile.inputFileName = shotFileURL.lastPathComponent // includes extension
+    self.dirty =  false
 }
 
 
@@ -46,3 +48,5 @@ func shotFilesOpenDialog() {
 //    }
 // } // end shotFilesOpenDialogAndLoop()
 */
+
+}

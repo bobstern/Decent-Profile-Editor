@@ -99,7 +99,7 @@ struct StepViewBuilder: View {
                 // if idx < vm.newProfile.shotSteps.count {
                 Group {
                     /// "Duplicate" button:
-                    Button(action: {duplicateStep(atIndex: idx)},
+                    Button(action: {vm.duplicateStep(atIndex: idx)},
                            label: {Image("doc.on.doc-regular").resizable().frame(width: 24, height: 24)} ).padding(.trailing, 30)
                     /// "Delete" button:
                     Button(
@@ -118,7 +118,7 @@ struct StepViewBuilder: View {
             // "Swap" button = row alternating w/ preceding HStack:
             if idx < vm.newProfile.shotSteps.count-1 {  // Omit after last row.
                 HStack{
-                    Button(action: { moveDownOneStep(fromIndex: idx) },
+                    Button(action: { vm.moveDownOneStep(fromIndex: idx) },
                            label: {Image("arrow.triangle.swap-heavy").resizable().frame(width: 22, height: 22).opacity(0.5) } )
                         .padding(.leading, 10)
                         .frame(height: 40)
