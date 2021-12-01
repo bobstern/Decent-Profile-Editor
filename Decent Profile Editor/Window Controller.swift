@@ -21,11 +21,13 @@ class ProfileWindowController<RootView: View>: NSWindowController, ObservableObj
         super.init(window: window)
         self.shouldCascadeWindows = true // ignored!
         window.cascadeTopLeft(from: CGPoint(x: 20, y: 0))
+        vm.shotFilesOpenDialog()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
 struct MasterView: View {

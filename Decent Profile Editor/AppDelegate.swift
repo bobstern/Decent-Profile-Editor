@@ -15,6 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create the SwiftUI view that provides the window contents.
         dateFormatter.dateFormat = "yyyy-MM-dd 'T'HHmm"
         // shotFilesOpenDialog() // Move to window init for multi-window.
+        
+/*
         let contentView = MasterView() // First View.
 
         // Create the window and set the content view.
@@ -28,12 +30,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // First View:
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
+*/
+        self.newWindow()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
-
+    @IBAction func menuNew (_ sender: NSMenuItem) {
+        self.newWindow()
+    }
+    
+    func newWindow() {
+        let vm = ViewModel()
+        let rootView = ProfileView(vm: vm)
+        let controller = ProfileWindowController(rootView: rootView, vm: vm)
+        controller.window?.title = "New window"
+        controller.showWindow(nil) // nil=sender, not receiver.
+    }
 }
 
