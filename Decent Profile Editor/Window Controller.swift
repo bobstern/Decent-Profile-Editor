@@ -14,10 +14,10 @@ class ProfileWindowController<RootView: View>: NSWindowController, ObservableObj
         print("INIT Profile View Controller")
         self.vm = vm
         let hostingController = NSHostingController(
-            rootView: rootView.frame(width: 1400, height: 400)
+            rootView: rootView.frame(width: 1400, height: 800)
         )
         let window = NSWindow(contentViewController: hostingController)
-        window.setContentSize(NSSize(width: 1400, height: 400) )
+        window.setContentSize(NSSize(width: 1400, height: 800) )
         super.init(window: window)
         self.shouldCascadeWindows = true // ignored!
         window.cascadeTopLeft(from: CGPoint(x: 20, y: 0))

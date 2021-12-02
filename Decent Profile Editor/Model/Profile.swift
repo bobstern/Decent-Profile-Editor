@@ -8,9 +8,9 @@ struct Profile {
     private var stepDictsArray : Array<[String:String]> = [] // To Do: convert to computed var.
     var shotContainerPath = ""
 //    var shotSteps : Array<ShotStep> = []
-    var shotSteps = [ShotStep]() // init w one step
+    var shotSteps = [ShotStep()] // init w one empty step.
     var stepsCount : Int {shotSteps.count}
-    var profileDict : [String:String] = [:]
+//    var profileDict : [String:String] = [:]
     var profileTitle = ""
     var profileNotes = ""
     var author = ""  // Bob
@@ -31,14 +31,20 @@ struct Profile {
     init(fromTcl inputTcl: String) {
         self.stepDictsArray = stepDictsArrayDecode(from: inputTcl)
         self.shotSteps = shotStepObjects(from: self.stepDictsArray)
-       
-        self.profileDict = profileDictDecode(from: inputTcl)
+        let profileDict = profileDictDecode(from: inputTcl)
         // print("PROFILE DEBUG " + self.profileDict.debugDescription)
-        self.profileTitle = self.profileDict["profile_title"] ?? ""
-        self.volume_track_after_step = self.profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
-        self.press_dampen_range = self.profileDict["maximum_pressure_range_advanced"] ?? "0.1"
-        self.flow_dampen_range = self.profileDict["maximum_flow_range_advanced"] ?? "0.1"
-        self.stopVolume = self.profileDict["final_desired_shot_volume_advanced"] ?? "0"
+        self.profileTitle = profileDict["profile_title"] ?? ""
+        self.volume_track_after_step = profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
+        self.press_dampen_range = profileDict["maximum_pressure_range_advanced"] ?? "0.1"
+        self.flow_dampen_range = profileDict["maximum_flow_range_advanced"] ?? "0.1"
+        self.stopVolume = profileDict["final_desired_shot_volume_advanced"] ?? "0"
+//        self.profileDict = profileDictDecode(from: inputTcl)
+//        // print("PROFILE DEBUG " + self.profileDict.debugDescription)
+//        self.profileTitle = self.profileDict["profile_title"] ?? ""
+//        self.volume_track_after_step = self.profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
+//        self.press_dampen_range = self.profileDict["maximum_pressure_range_advanced"] ?? "0.1"
+//        self.flow_dampen_range = self.profileDict["maximum_flow_range_advanced"] ?? "0.1"
+//        self.stopVolume = self.profileDict["final_desired_shot_volume_advanced"] ?? "0"
     }
     
     
