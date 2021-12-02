@@ -16,7 +16,7 @@
 		C4CE9E202650B17500CB518B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E1F2650B17500CB518B /* Preview Assets.xcassets */; };
 		C4CE9E232650B17500CB518B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E212650B17500CB518B /* Main.storyboard */; };
 		C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */; };
-		C4CE9E362650B20800CB518B /* ProfileParameters View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E302650B20800CB518B /* ProfileParameters View.swift */; };
+		C4CE9E362650B20800CB518B /* Profile Globals View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E302650B20800CB518B /* Profile Globals View.swift */; };
 		C4CE9E382650B20800CB518B /* Steps View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E332650B20800CB518B /* Steps View.swift */; };
 		C4CE9E3A2650B20800CB518B /* Profile View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E352650B20800CB518B /* Profile View.swift */; };
 		C4CE9E462650B27900CB518B /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E402650B27900CB518B /* Profile.swift */; };
@@ -40,7 +40,7 @@
 		C4CE9E242650B17500CB518B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4CE9E252650B17500CB518B /* Decent_Profile_Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Decent_Profile_Editor.entitlements; sourceTree = "<group>"; };
 		C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		C4CE9E302650B20800CB518B /* ProfileParameters View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileParameters View.swift"; sourceTree = "<group>"; };
+		C4CE9E302650B20800CB518B /* Profile Globals View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Globals View.swift"; sourceTree = "<group>"; };
 		C4CE9E332650B20800CB518B /* Steps View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Steps View.swift"; sourceTree = "<group>"; };
 		C4CE9E352650B20800CB518B /* Profile View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile View.swift"; sourceTree = "<group>"; };
 		C4CE9E402650B27900CB518B /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		C4CE9E2F2650B20800CB518B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C4CE9E302650B20800CB518B /* ProfileParameters View.swift */,
+				C4CE9E302650B20800CB518B /* Profile Globals View.swift */,
 				C4CE9E332650B20800CB518B /* Steps View.swift */,
 				527BB09526F72F2E006E138C /* Step View Builder.swift */,
 				C4CE9E352650B20800CB518B /* Profile View.swift */,
@@ -219,7 +219,7 @@
 				C4CE9E472650B27900CB518B /* Shot Step.swift in Sources */,
 				527BB09626F72F2E006E138C /* Step View Builder.swift in Sources */,
 				C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */,
-				C4CE9E362650B20800CB518B /* ProfileParameters View.swift in Sources */,
+				C4CE9E362650B20800CB518B /* Profile Globals View.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +373,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = "1.4 beta 1";
 				PRODUCT_BUNDLE_IDENTIFIER = "sternip.Decent-Profile-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -400,7 +400,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = "1.4 beta 1";
 				PRODUCT_BUNDLE_IDENTIFIER = "sternip.Decent-Profile-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

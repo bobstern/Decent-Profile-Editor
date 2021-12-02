@@ -13,8 +13,8 @@ struct ShotStep : Identifiable, Hashable {
     var pumpVal = ""
     // var pumpDisplay : String {return pumpType.rawValue + " " + pumpVal}
     var time = ""
-    var exitType = ExitTypes.zero
-    var exitVal = ""
+    var exitOrLimitCondx = ExitOrLimitTypes.zero
+    var exitOrLimitVal = ""
     // var exitDisplay:String {return (exitType.display + exitVal)}
     
     func encodeTcl() -> String {
@@ -25,12 +25,12 @@ struct ShotStep : Identifiable, Hashable {
         tcl += "pump \(self.pumpType.rawValue) \(self.pumpType.rawValue) \(self.pumpVal) "
         tcl += "transition \(self.ramp) "
         tcl += "seconds \(self.time) "
-        if self.exitType == .zero {
+        if self.exitOrLimitCondx == .zero {
             tcl += "exit_if 0 " // exit_type 0 "
         } else {
             tcl += "exit_if 1 "
-            tcl += "exit_type \(self.exitType.rawValue) "
-            tcl += "exit_\(self.exitType.rawValue) \(self.exitVal) "
+            tcl += "exit_type \(self.exitOrLimitCondx.rawValue) "
+            tcl += "exit_\(self.exitOrLimitCondx.rawValue) \(self.exitOrLimitVal) "
         }
         tcl += "volume 999 sensor coffee}"
         return tcl
@@ -40,21 +40,26 @@ struct ShotStep : Identifiable, Hashable {
 enum PumpTypes : String, CaseIterable {case pressure, flow}
 
 // display = computed property:
-enum ExitTypes : String, CaseIterable {
-    case pressure_over, pressure_under, flow_over, flow_under
+enum ExitOrLimitTypes : String, CaseIterable {
+    // popup displays in this order:
+    case pressure_limit, pressure_over, pressure_under, flow_limit, flow_over, flow_under
     case zero = "0"
     var display : String {
         switch self {
         case .zero :
             return "      n/a"
+        case .pressure_limit :
+            return "pressure limit "
+        case .flow_limit :
+            return "    flow limit "
         case .pressure_over :
-            return "pressure > "
+            return "pressure exit > "
         case.pressure_under :
-            return "pressure < "
+            return "pressure exit < "
         case .flow_over :
-            return "   flow > "
+            return "    flow exit > "
         case.flow_under :
-           return "   flow < "
+            return "    flow exit < "
         }
     }
 }

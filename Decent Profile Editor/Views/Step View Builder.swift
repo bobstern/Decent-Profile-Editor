@@ -75,23 +75,23 @@ struct StepViewBuilder: View {
                 
                 Spacer().frame(width: 60)
                 
-                // Exit Condition
-                Picker("", selection: stepBinding.exitType) {
-                    ForEach (ExitTypes.allCases, id: \.self) { choice in
+                /// EXIT or LIMIT condition
+                Picker("", selection: stepBinding.exitOrLimitCondx) {
+                    ForEach (ExitOrLimitTypes.allCases, id: \.self) { choice in
                         Text(choice.display)
                     }
-                }.frame(width: 130, alignment: .trailing)
+                }.frame(width: 165, alignment: .trailing)
                 
                 // ZStack used merely to apply frame to align right boundary of blank space before buttons.
                 // idx out of range bug fixed by first "if":
                 ZStack {
                     //                    if idx < vm.newProfile.shotSteps.count, vm.newProfile.shotSteps[idx].exitType == .zero {
-                    if vm.newProfile.shotSteps[idx].exitType == .zero {
+                    if vm.newProfile.shotSteps[idx].exitOrLimitCondx == .zero {
                         EmptyView()
                     } else {
-                        TextField("", text: stepBinding.exitVal).frame(width: 44, alignment: .center).padding(.trailing, 8)
+                        TextField("", text: stepBinding.exitOrLimitVal).frame(width: 44, alignment: .center).padding(.trailing, 8)
                     }
-                }.frame(width: 100, alignment: .leading) // aligns buttons at right
+                }.frame(width: 70, alignment: .leading) // aligns buttons at right
                 // end ZStack
                 
                 // HStack continued:
@@ -100,7 +100,7 @@ struct StepViewBuilder: View {
                 Group {
                     /// "Duplicate" button:
                     Button(action: {vm.duplicateStep(atIndex: idx)},
-                           label: {Image("doc.on.doc-regular").resizable().frame(width: 24, height: 24)} ).padding(.trailing, 30)
+                           label: {Image("doc.on.doc-regular").resizable().frame(width: 24, height: 24)} ).padding(.trailing, 25)
                     /// "Delete" button:
                     Button(
                         action: {

@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct ProfileParametersView: View {
+struct ProfileGlobalsView: View {
     @ObservedObject var vm : ViewModel
 
     var body: some View {
@@ -20,15 +20,15 @@ struct ProfileParametersView: View {
                 Text("Track volume AFTER step:").padding(.trailing, -4)
                 TextField("", text: $vm.newProfile.volume_track_after_step).multilineTextAlignment(.center).frame(width: 40)
                 Spacer()
-                Text("Flow target dampening range:").padding(.trailing, -4)
+                Text("Flow limiter range:").padding(.trailing, -4)
                 TextField("", text: $vm.newProfile.flow_dampen_range).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
             }//.padding(.vertical, 20)
             
             HStack {
-                Text("Stop at Volume (0 = Off):").padding(.trailing, -4)//.frame(width: 250, alignment: .trailing)
-                TextField("", text: $vm.newProfile.stopVolume).multilineTextAlignment(.trailing).frame(width: 45)
+                Text("Stop at Volume (0 = Off):").padding(.trailing, 4)//.frame(width: 250, alignment: .trailing)
+                TextField("", text: $vm.newProfile.stopVolume).multilineTextAlignment(.center).frame(width: 40)
                 Spacer()
-                Text("Pressure target dampening range:").frame(width: 300, alignment: .trailing).padding(.trailing, -4)
+                Text("Pressure limiter range:").frame(width: 300, alignment: .trailing).padding(.trailing, -4)
                 TextField("", text: $vm.newProfile.press_dampen_range).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
             }//.padding(.vertical, 20)
         }

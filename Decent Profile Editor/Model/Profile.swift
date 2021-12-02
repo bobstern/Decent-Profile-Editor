@@ -110,21 +110,23 @@ struct Profile {
             newStep.pumpVal = rnd(newStep.pumpVal)
 
             if stepDict["exit_if"] == "1" {
-                newStep.exitType = ExitTypes(rawValue: stepDict["exit_type"]!)!
+                newStep.exitOrLimitCondx = ExitOrLimitTypes(rawValue: stepDict["exit_type"]!)!
             }
-            switch newStep.exitType {
+            switch newStep.exitOrLimitCondx {
             case .zero :
                 break
+            case .pressure_limit, .flow_limit :
+                newStep.exitOrLimitVal = stepDict["max_flow_or_pressure"]!
             case .pressure_over :
-                newStep.exitVal = stepDict["exit_pressure_over"]!
+                newStep.exitOrLimitVal = stepDict["exit_pressure_over"]!
             case.pressure_under :
-                newStep.exitVal = stepDict["exit_pressure_under"]!
+                newStep.exitOrLimitVal = stepDict["exit_pressure_under"]!
             case .flow_over :
-                newStep.exitVal = stepDict["exit_flow_over"]!
+                newStep.exitOrLimitVal = stepDict["exit_flow_over"]!
             case.flow_under :
-                newStep.exitVal = stepDict["exit_flow_under"]!
+                newStep.exitOrLimitVal = stepDict["exit_flow_under"]!
             }
-            newStep.exitVal = rnd(newStep.exitVal)
+            newStep.exitOrLimitVal = rnd(newStep.exitOrLimitVal)
 
             shotStepObjectArray.append(newStep)
             // print("Step \(stepN);  Pump: \(newStep.pumpDisplay);  Exit: \(newStep.exitDisplay)")

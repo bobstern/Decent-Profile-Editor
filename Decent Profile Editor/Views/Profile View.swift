@@ -30,7 +30,7 @@ struct ProfileView: View {
             }
             
 /// Profile-wide parameters:
-            ProfileParametersView(vm: vm)
+            ProfileGlobalsView(vm: vm)
             
             Divider().frame(height: 1.5).background(Color.black) // height=thickness
             
