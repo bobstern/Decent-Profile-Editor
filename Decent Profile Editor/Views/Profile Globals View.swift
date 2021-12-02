@@ -21,7 +21,7 @@ struct ProfileGlobalsView: View {
                 TextField("", text: $vm.newProfile.volume_track_after_step).multilineTextAlignment(.center).frame(width: 40)
                 Spacer()
                 Text("Flow limiter range:").padding(.trailing, -4)
-                TextField("", text: $vm.newProfile.flow_dampen_range).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
+                TextField("", text: $vm.newProfile.profileFlowLimiterRange).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
             }//.padding(.vertical, 20)
             
             HStack {
@@ -29,7 +29,7 @@ struct ProfileGlobalsView: View {
                 TextField("", text: $vm.newProfile.stopVolume).multilineTextAlignment(.center).frame(width: 40)
                 Spacer()
                 Text("Pressure limiter range:").frame(width: 300, alignment: .trailing).padding(.trailing, -4)
-                TextField("", text: $vm.newProfile.press_dampen_range).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
+                TextField("", text: $vm.newProfile.profilePressureLimiterRange).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
             }//.padding(.vertical, 20)
         }
         .padding(.leading, 8)

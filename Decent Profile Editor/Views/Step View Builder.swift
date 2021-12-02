@@ -75,10 +75,18 @@ struct StepViewBuilder: View {
                 
                 Spacer().frame(width: 60)
                 
-                /// EXIT or LIMIT condition
+                // MARK: EXIT or LIMIT condition
                 Picker("", selection: stepBinding.exitOrLimitCondx) {
                     ForEach (ExitOrLimitTypes.allCases, id: \.self) { choice in
-                        Text(choice.display)
+                        if choice != ExitOrLimitTypes.limit {
+                            Text(choice.display)
+                        } else {
+                            if let pumpObverse = vm.newProfile.shotSteps[idx].pumpType.obverse {
+                                Text("\(pumpObverse) LIMIT")
+                            } else {
+                                Text("")
+                            }
+                        }
                     }
                 }.frame(width: 165, alignment: .trailing)
                 

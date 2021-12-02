@@ -7,16 +7,16 @@ import Cocoa
 struct Profile {
     private var stepDictsArray : Array<[String:String]> = [] // To Do: convert to computed var.
     var shotContainerPath = ""
-//    var shotSteps : Array<ShotStep> = []
+    //    var shotSteps : Array<ShotStep> = []
     var shotSteps = [ShotStep()] // init w one empty step.
     var stepsCount : Int {shotSteps.count}
-//    var profileDict : [String:String] = [:]
+    //    var profileDict : [String:String] = [:]
     var profileTitle = ""
     var profileNotes = ""
     var author = ""  // Bob
     var volume_track_after_step = "0" // Preinfusion = 2. Key = final_desired_shot_volume_advanced_count_start.
-    var press_dampen_range = "0.1" // key = maximum_pressure_range_advanced
-    var flow_dampen_range = "0.1" // key = maximum_flow_range_advanced
+    var profilePressureLimiterRange = "0.1" // key = maximum_pressure_range_advanced
+    var profileFlowLimiterRange = "0.1" // key = maximum_flow_range_advanced
     var tank_desired_water_temperature = "0"
     var stopVolume = "0"
     
@@ -30,21 +30,21 @@ struct Profile {
     
     init(fromTcl inputTcl: String) {
         self.stepDictsArray = stepDictsArrayDecode(from: inputTcl)
-        self.shotSteps = shotStepObjects(from: self.stepDictsArray)
+        self.shotSteps = decodeShotStepObjects(from: self.stepDictsArray)
         let profileDict = profileDictDecode(from: inputTcl)
         // print("PROFILE DEBUG " + self.profileDict.debugDescription)
         self.profileTitle = profileDict["profile_title"] ?? ""
         self.volume_track_after_step = profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
-        self.press_dampen_range = profileDict["maximum_pressure_range_advanced"] ?? "0.1"
-        self.flow_dampen_range = profileDict["maximum_flow_range_advanced"] ?? "0.1"
+        self.profilePressureLimiterRange = profileDict["maximum_pressure_range_advanced"] ?? "0.1"
+        self.profileFlowLimiterRange = profileDict["maximum_flow_range_advanced"] ?? "0.1"
         self.stopVolume = profileDict["final_desired_shot_volume_advanced"] ?? "0"
-//        self.profileDict = profileDictDecode(from: inputTcl)
-//        // print("PROFILE DEBUG " + self.profileDict.debugDescription)
-//        self.profileTitle = self.profileDict["profile_title"] ?? ""
-//        self.volume_track_after_step = self.profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
-//        self.press_dampen_range = self.profileDict["maximum_pressure_range_advanced"] ?? "0.1"
-//        self.flow_dampen_range = self.profileDict["maximum_flow_range_advanced"] ?? "0.1"
-//        self.stopVolume = self.profileDict["final_desired_shot_volume_advanced"] ?? "0"
+        //        self.profileDict = profileDictDecode(from: inputTcl)
+        //        // print("PROFILE DEBUG " + self.profileDict.debugDescription)
+        //        self.profileTitle = self.profileDict["profile_title"] ?? ""
+        //        self.volume_track_after_step = self.profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
+        //        self.press_dampen_range = self.profileDict["maximum_pressure_range_advanced"] ?? "0.1"
+        //        self.flow_dampen_range = self.profileDict["maximum_flow_range_advanced"] ?? "0.1"
+        //        self.stopVolume = self.profileDict["final_desired_shot_volume_advanced"] ?? "0"
     }
     
     
@@ -64,8 +64,8 @@ struct Profile {
         // Profile Limits page:
         tcl += "final_desired_shot_volume_advanced_count_start \(self.volume_track_after_step)\n"
         tcl += "final_desired_shot_volume_advanced \(self.stopVolume)\n"
-        tcl += "maximum_pressure_range_advanced \(self.press_dampen_range)\n"
-        tcl += "maximum_flow_range_advanced \(self.flow_dampen_range)\n"
+        tcl += "maximum_pressure_range_advanced \(self.profilePressureLimiterRange)\n"
+        tcl += "maximum_flow_range_advanced \(self.profileFlowLimiterRange)\n"
         tcl += "tank_desired_water_temperature 0\n"
         
         // Hidden from GUI:
@@ -74,78 +74,81 @@ struct Profile {
         tcl += "profile_hide 0\n"
         
         if toClipboard {
-//            let clipboard = NSPasteboard.general
-//            clipboard.clearContents()
+            //            let clipboard = NSPasteboard.general
+            //            clipboard.clearContents()
             NSPasteboard.general.setString(tcl, forType: .string)
         }
         return tcl
     }
 }
+
+func decodeShotStepObjects(from stepDictsArray: Array<[String:String]>) -> Array<ShotStep> {
     
-
-    func shotStepObjects(from stepDictsArray: Array<[String:String]>) -> Array<ShotStep> {
-
-        var shotStepObjectArray = [ShotStep]()
-
-        // stepN was used only for debugging:
-        // for (stepN, stepDict) in stepDictsArray.enumerated() {
-        for stepDict in stepDictsArray {
-            var newStep = ShotStep(pumpType: PumpTypes(rawValue: stepDict["pump"]!)!)
-
-            newStep.descrip = stepDict["name"] ?? ""
-            newStep.temp = rnd( stepDict["temperature"]! )
-            newStep.time = rnd( stepDict["seconds"]! )
-            // print (newStep.temp + "   " + newStep.time)
-
-            if stepDict["transition"]! != "fast" {
-                newStep.ramp = .smooth
-            }
-
-            switch newStep.pumpType {
-            case .pressure :
-                newStep.pumpVal = stepDict["pressure"]!
-            case .flow :
-                newStep.pumpVal = stepDict["flow"]!
-            }
-            newStep.pumpVal = rnd(newStep.pumpVal)
-
-            if stepDict["exit_if"] == "1" {
-                newStep.exitOrLimitCondx = ExitOrLimitTypes(rawValue: stepDict["exit_type"]!)!
-            }
-            switch newStep.exitOrLimitCondx {
-            case .zero :
-                break
-            case .pressure_limit, .flow_limit :
-                newStep.exitOrLimitVal = stepDict["max_flow_or_pressure"]!
-            case .pressure_over :
-                newStep.exitOrLimitVal = stepDict["exit_pressure_over"]!
-            case.pressure_under :
-                newStep.exitOrLimitVal = stepDict["exit_pressure_under"]!
-            case .flow_over :
-                newStep.exitOrLimitVal = stepDict["exit_flow_over"]!
-            case.flow_under :
-                newStep.exitOrLimitVal = stepDict["exit_flow_under"]!
-            }
-            newStep.exitOrLimitVal = rnd(newStep.exitOrLimitVal)
-
-            shotStepObjectArray.append(newStep)
-            // print("Step \(stepN);  Pump: \(newStep.pumpDisplay);  Exit: \(newStep.exitDisplay)")
+    var shotStepObjectArray = [ShotStep]()
+    
+    // stepN was used only for debugging:
+    // for (stepN, stepDict) in stepDictsArray.enumerated() {
+    for stepDict in stepDictsArray {
+        var newStep = ShotStep(pumpType: PumpTypes(rawValue: stepDict["pump"]!)!)
+        
+        newStep.descrip = stepDict["name"] ?? ""
+        newStep.temp = rnd( stepDict["temperature"]! )
+        newStep.time = rnd( stepDict["seconds"]! )
+        // print (newStep.temp + "   " + newStep.time)
+        
+        if stepDict["transition"]! != "fast" {
+            newStep.ramp = .smooth
         }
-        // print(shotStepObjectArray)
-
-
-        //
-        // Export as tab-delimited (TSV) format:
-        //
-
-//        var tempShotTSV = "Description\tStep\tTran-sition\tTemp\tPump\tTime\tExit\n"
-//        for (stepN, shotStep) in shotStepObjectArray.enumerated() {
-//            tempShotTSV += "\(shotStep.descrip)\t\(String(stepN+1))\t\(shotStep.ramp.rawValue)\t\(shotStep.temp)\t\(shotStep.pumpDisplay)\t\(shotStep.time)\t\(shotStep.exitDisplay)\n"
-//        }
-//        tempShotTSV += "\n" // 2 newlines delimit end of table for Nisus macro.
-//        return tempShotTSV
-        return shotStepObjectArray
+        
+        print (stepDict)
+        newStep.pumpVal = rnd(newStep.pumpVal)
+        switch newStep.pumpType {
+        case .pressure :
+            newStep.pumpVal = stepDict["pressure"]!
+        case .flow :
+            newStep.pumpVal = stepDict["flow"]!
+        }
+        
+        if stepDict["exit_if"] == "1" {
+            newStep.exitOrLimitCondx = ExitOrLimitTypes(rawValue: stepDict["exit_type"]!)!
+        }
+        switch newStep.exitOrLimitCondx {
+        case .zero :
+            newStep.exitOrLimitVal = ""
+        case .pressure_over :
+            newStep.exitOrLimitVal = stepDict["exit_pressure_over"]!
+        case.pressure_under :
+            newStep.exitOrLimitVal = stepDict["exit_pressure_under"]!
+        case .flow_over :
+            newStep.exitOrLimitVal = stepDict["exit_flow_over"]!
+        case.flow_under :
+            newStep.exitOrLimitVal = stepDict["exit_flow_under"]!
+        case .limit :
+            print("ERROR: Limit key not decoded yet!")
+        }
+        if let limitVal = stepDict["max_flow_or_pressure"] {
+            newStep.exitOrLimitCondx = .limit
+            newStep.exitOrLimitVal = limitVal
+        }
+        
+        shotStepObjectArray.append(newStep)
+        
+        // print("Step \(stepN);  Pump: \(newStep.pumpDisplay);  Exit: \(newStep.exitDisplay)")
     }
+    
+    // print(shotStepObjectArray)
+    //
+    // Export as tab-delimited (TSV) format:
+    //
+    
+    //        var tempShotTSV = "Description\tStep\tTran-sition\tTemp\tPump\tTime\tExit\n"
+    //        for (stepN, shotStep) in shotStepObjectArray.enumerated() {
+    //            tempShotTSV += "\(shotStep.descrip)\t\(String(stepN+1))\t\(shotStep.ramp.rawValue)\t\(shotStep.temp)\t\(shotStep.pumpDisplay)\t\(shotStep.time)\t\(shotStep.exitDisplay)\n"
+    //        }
+    //        tempShotTSV += "\n" // 2 newlines delimit end of table for Nisus macro.
+    //        return tempShotTSV
+    return shotStepObjectArray
+}
 
 
 func profileTitleDecode(from inputTcl: String) -> String {
@@ -153,7 +156,7 @@ func profileTitleDecode(from inputTcl: String) -> String {
     var titleDelimiter2 : Character // split delimiter.
     if inputTcl.contains(Character("\t")) {
         titleDelimiter1 = "\tprofile_title " // Shot file.
-        } else {
+    } else {
         titleDelimiter1 = "\nprofile_title "  // tcl Profile file.
     }
     let titleDelimitedArray = inputTcl.components(separatedBy: titleDelimiter1)
@@ -183,7 +186,7 @@ func stepDictsArrayDecode(from inputTcl : String) -> Array<[String:String]> {
     advanced_tcl = advanced_tcl_Array[1] // 0-based.
     let advanced_tcl_Array2 = advanced_tcl.components(separatedBy: "}}\n")
     advanced_tcl = advanced_tcl_Array2[0]
-
+    
     let steps_tcl_Array = advanced_tcl.components(separatedBy: "} {")
     
     var tempStepDictsArray = Array<[String:String]>()
@@ -208,7 +211,7 @@ func decodeTCLtoDict(kvTxt: String ) -> [String:String] {
     idxAfter = kvRemains.firstIndex(of: " ") ?? kvRemains.endIndex
     while true {
         word1 = String(kvRemains[..<idxAfter])
-    
+        
         switch keyVal {
         case .ky:
             keyVal = .val
