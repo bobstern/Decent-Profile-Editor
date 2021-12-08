@@ -28,9 +28,9 @@ struct StepViewBuilder: View {
     //        }
     //    }
     let idx: Int
-    func stepBindingSafe(idx: Int) -> Binding<ShotStep> {
-        if idx < vm.newProfile.shotSteps.count {
-            return $vm.newProfile.shotSteps[idx]
+    func stepBindingSafe(idx: Int) -> Binding<Profile.ShotStep> {
+        if idx < vm.profile.shotSteps.count {
+            return $vm.profile.shotSteps[idx]
         } else {
             return $vm.dummyShotStep  //$vm.newProfile.shotSteps[0]
         }
@@ -40,7 +40,7 @@ struct StepViewBuilder: View {
     var body: some View {
         let stepBinding = stepBindingSafe(idx: idx) // $vm.newProfile.shotSteps[idx]
         
-        if idx < vm.newProfile.shotSteps.count { // fix out of range error for button views.
+        if idx < vm.profile.shotSteps.count { // fix out of range error for button views.
             // HStack has all UX elements except Swap button:
             HStack {
                 Group {
@@ -55,14 +55,14 @@ struct StepViewBuilder: View {
                     
                     /// Ramp
                     Picker("", selection: stepBinding.ramp) {
-                        ForEach (Ramp.allCases, id: \.self) { choice in
+                        ForEach (Profile.ShotStep.Ramp.allCases, id: \.self) { choice in
                             Text(choice.display)
                         }
                     }.frame(width: 80).padding(.trailing, -8)
                     
                     /// Pump: Pressure or Flow
                     Picker("", selection: stepBinding.pumpType) {
-                        ForEach (PumpTypes.allCases, id: \.self) { choice in
+                        ForEach (Profile.ShotStep.PumpTypes.allCases, id: \.self) { choice in
                             Text(choice.rawValue)
                         }
                     }.frame(width: 120, alignment: .trailing)
@@ -77,11 +77,11 @@ struct StepViewBuilder: View {
                 
                 // MARK: EXIT or LIMIT condition
                 Picker("", selection: stepBinding.exitOrLimitCondx) {
-                    ForEach (ExitOrLimitTypes.allCases, id: \.self) { choice in
-                        if choice != ExitOrLimitTypes.limit {
+                    ForEach (Profile.ShotStep.ExitOrLimitTypes.allCases, id: \.self) { choice in
+                        if choice != Profile.ShotStep.ExitOrLimitTypes.limit {
                             Text(choice.display)
                         } else {
-                            if let pumpObverse = vm.newProfile.shotSteps[idx].pumpType.obverse {
+                            if let pumpObverse = vm.profile.shotSteps[idx].pumpType.obverse {
                                 Text("\(pumpObverse) LIMIT")
                             } else {
                                 Text("")
@@ -94,7 +94,7 @@ struct StepViewBuilder: View {
                 // idx out of range bug fixed by first "if":
                 ZStack {
                     //                    if idx < vm.newProfile.shotSteps.count, vm.newProfile.shotSteps[idx].exitType == .zero {
-                    if vm.newProfile.shotSteps[idx].exitOrLimitCondx == .zero {
+                    if vm.profile.shotSteps[idx].exitOrLimitCondx == .zero {
                         EmptyView()
                     } else {
                         TextField("", text: stepBinding.exitOrLimitVal).frame(width: 44, alignment: .center).padding(.trailing, 8)
@@ -124,7 +124,7 @@ struct StepViewBuilder: View {
             // end HStack
             
             // "Swap" button = row alternating w/ preceding HStack:
-            if idx < vm.newProfile.shotSteps.count-1 {  // Omit after last row.
+            if idx < vm.profile.shotSteps.count-1 {  // Omit after last row.
                 HStack{
                     Button(action: { vm.moveDownOneStep(fromIndex: idx) },
                            label: {Image("arrow.triangle.swap-heavy").resizable().frame(width: 22, height: 22).opacity(0.5) } )

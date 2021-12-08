@@ -14,7 +14,7 @@ class ViewModel : ObservableObject {
     // Initializing to default values reqd to instantiate singleton.
     // Defaults are reasonable for Profile but arbitrary for ShotStep.
     // @Published var oldProfile = Profile()
-    @Published var newProfile = Profile() {didSet {dirty = true} }
+    @Published var profile = Profile() {didSet {dirty = true} }
     @Published var overwriteFileAlert = false
     @Published var overwriteFilePath = ""
     @Published var dirty = false
@@ -30,7 +30,7 @@ class ViewModel : ObservableObject {
     // @Published var overwriteFileConfirmed = false
     // @Published var currentStep = ShotStep()
     
-    var dummyShotStep = ShotStep()
+    var dummyShotStep = Profile.ShotStep()
 
     
     func setDirty() {

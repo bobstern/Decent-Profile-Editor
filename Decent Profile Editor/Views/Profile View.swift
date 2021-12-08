@@ -20,7 +20,7 @@ struct ProfileView: View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
                 Button("Open Another Profile") {vm.shotFilesOpenDialog()}.padding(.leading, 8)
-                Button("Copy to Clipboard") {_ = vm.newProfile.encodeTcl(toClipboard: true)}.padding(.leading, 30)
+                Button("Copy to Clipboard") {_ = vm.profile.encodeTcl(toClipboard: true)}.padding(.leading, 30)
                 if vm.dirty {
                     Button("**SAVE**") {vm.tclSavePanel()}.padding(.leading, 30).font(Font.system(size: 18, weight: .bold)) //.foregroundColor(.red) // Red distracting.
                 } else {

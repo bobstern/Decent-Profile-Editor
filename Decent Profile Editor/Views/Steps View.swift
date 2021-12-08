@@ -11,7 +11,7 @@ struct StepsView : View {
     
     var body: some View {
         ScrollView {
-            ForEach(Array(vm.newProfile.shotSteps.enumerated()), id: \.element.id) { (idx, step) in
+            ForEach(Array(vm.profile.shotSteps.enumerated()), id: \.element.id) { (idx, step) in
                 
                 StepViewBuilder(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx, idx: idx)
                 

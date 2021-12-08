@@ -27,7 +27,7 @@ func shotFilesOpenDialog() {
     // url contents = nil if user canceled open dialog:
     guard let shotInputTcl = try? String(contentsOf: shotFileURL) else {return}
     // self.oldProfile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
-    self.newProfile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
+    self.profile = Profile(fromTcl: shotInputTcl, shotContainerPath: shotContainerPath)
     // self.newProfile.inputFileName = shotFileURL.lastPathComponent // includes extension
     self.dirty =  false
 }
