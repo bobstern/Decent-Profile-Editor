@@ -78,7 +78,9 @@ extension Profile {
             case .limit :
                 print("Impossible: Limit key not decoded yet!")
             }
-            if let limitVal = stepDict["max_flow_or_pressure"] {
+            
+            // Absence of limit signified by absence of key OR value = 0.
+            if let limitVal = stepDict["max_flow_or_pressure"], limitVal != "0" {
                 newStep.exitOrLimitCondx = .limit
                 newStep.exitOrLimitVal = limitVal
             }
