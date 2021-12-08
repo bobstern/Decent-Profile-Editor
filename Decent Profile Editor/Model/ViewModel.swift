@@ -8,7 +8,6 @@ import Foundation
 class ViewModel : ObservableObject {
     // static let singleton = ViewModel()
     init () {
-        print("INIT ViewModel")
     } // was private for singleton single-window version
     
     // Initializing to default values reqd to instantiate singleton.

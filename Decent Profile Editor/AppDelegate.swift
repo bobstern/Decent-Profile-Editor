@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func newWindow() {
         let vm = ViewModel()
-        let rootView = ProfileView(vm: vm)
+        let rootView = ProfileMainView(vm: vm)
         let controller = ProfileWindowController(rootView: rootView, vm: vm)
         controller.window?.title = "New window"
         controller.showWindow(nil) // nil=sender, not receiver.

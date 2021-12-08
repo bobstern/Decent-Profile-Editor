@@ -1,15 +1,9 @@
-//
-//  ContentView.swift
+//  Profile Main View.swift
 //  Decent Profile Editor
-//
-//  Created by bob on 5/04/2021.
-//
 
 import SwiftUI
 
-let profileViewTemp = ProfileView(vm: ViewModel() )
-
-struct ProfileView: View {
+struct ProfileMainView: View {
     @ObservedObject var vm : ViewModel
     @State private var actionIdx : Int?
     @State private var deleteStepAlert = false
@@ -41,8 +35,9 @@ struct ProfileView: View {
                 StepsView(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx)
             }
 
-        } // ContentView outermost VStack
-        .frame(minWidth: 1400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+        } // ContentView outermost VStack.
+        // idealHeight omitted cuz ignored on Mac:
+        .frame(minWidth: 1400, maxWidth: 1400, minHeight: 400, maxHeight: .infinity)
         .padding(.leading, 8)
         .padding(.top, 20)
         .font(Font.system(size: 18))

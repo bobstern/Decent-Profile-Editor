@@ -20,7 +20,7 @@
 		C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */; };
 		C4CE9E362650B20800CB518B /* Profile Globals View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E302650B20800CB518B /* Profile Globals View.swift */; };
 		C4CE9E382650B20800CB518B /* Steps View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E332650B20800CB518B /* Steps View.swift */; };
-		C4CE9E3A2650B20800CB518B /* Profile View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E352650B20800CB518B /* Profile View.swift */; };
+		C4CE9E3A2650B20800CB518B /* Profile Main View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E352650B20800CB518B /* Profile Main View.swift */; };
 		C4CE9E462650B27900CB518B /* Profile & Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E402650B27900CB518B /* Profile & Shot.swift */; };
 		C4CE9E482650B27900CB518B /* Save to File or Clipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E432650B27900CB518B /* Save to File or Clipboard.swift */; };
 		C4CE9E492650B27900CB518B /* Open Profile Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E442650B27900CB518B /* Open Profile Files.swift */; };
@@ -45,7 +45,7 @@
 		C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		C4CE9E302650B20800CB518B /* Profile Globals View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Globals View.swift"; sourceTree = "<group>"; };
 		C4CE9E332650B20800CB518B /* Steps View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Steps View.swift"; sourceTree = "<group>"; };
-		C4CE9E352650B20800CB518B /* Profile View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile View.swift"; sourceTree = "<group>"; };
+		C4CE9E352650B20800CB518B /* Profile Main View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Main View.swift"; sourceTree = "<group>"; };
 		C4CE9E402650B27900CB518B /* Profile & Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile & Shot.swift"; sourceTree = "<group>"; };
 		C4CE9E432650B27900CB518B /* Save to File or Clipboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Save to File or Clipboard.swift"; sourceTree = "<group>"; };
 		C4CE9E442650B27900CB518B /* Open Profile Files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Open Profile Files.swift"; sourceTree = "<group>"; };
@@ -110,10 +110,10 @@
 		C4CE9E2F2650B20800CB518B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C4CE9E352650B20800CB518B /* Profile Main View.swift */,
 				C4CE9E302650B20800CB518B /* Profile Globals View.swift */,
 				C4CE9E332650B20800CB518B /* Steps View.swift */,
 				527BB09526F72F2E006E138C /* Step View Builder.swift */,
-				C4CE9E352650B20800CB518B /* Profile View.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,7 +217,7 @@
 				C49B2A3C2650B98C007C3849 /* System Globals.swift in Sources */,
 				C43BDE79275F465000049E87 /* Profile Encoder to tcl.swift in Sources */,
 				C42260C8265DC71F007800BE /* Utilities.swift in Sources */,
-				C4CE9E3A2650B20800CB518B /* Profile View.swift in Sources */,
+				C4CE9E3A2650B20800CB518B /* Profile Main View.swift in Sources */,
 				C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,
 				C43026E42760197F00A15D92 /* Profile Decoders from tcl.swift in Sources */,
@@ -377,7 +377,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "sternip.Decent-Profile-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -404,7 +404,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "sternip.Decent-Profile-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

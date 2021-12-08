@@ -9,18 +9,27 @@ import SwiftUI
 
 class ProfileWindowController<RootView: View>: NSWindowController, ObservableObject {
     @Published var vm: ViewModel
-    //    convenience init(rootView: RootView) {
+    
     init(rootView: RootView, vm: ViewModel) {
-        print("INIT Profile View Controller")
         self.vm = vm
         let hostingController = NSHostingController(
-            rootView: rootView.frame(width: 1400, height: 800)
+            rootView: rootView // rootView = SwiftUI ProfileView instantiated in AppDelegate.newWindow().
         )
         let window = NSWindow(contentViewController: hostingController)
-        window.setContentSize(NSSize(width: 1400, height: 800) )
+        window.setContentSize(NSSize(width: 1400, height: 1000) ) // Initial size accommodates 8 steps.
         super.init(window: window)
         self.shouldCascadeWindows = true // ignored!
-        window.cascadeTopLeft(from: CGPoint(x: 20, y: 0))
+        
+        // Windows cascade only vertically; all have same x alignment.
+        // x sets offset from screen left.  y ignored, so set to zero.
+        window.cascadeTopLeft(from: CGPoint(x: 10, y: 0) ) // Weird position if x=0.
+        
+        // Failed attempts to increase cascade offset:
+        // let winOrigin = window.frame.origin
+        // window.cascadeTopLeft(from: CGPoint(x: position.minX+20, y: position.maxY+20))
+        // window.setFrameTopLeftPoint(CGPoint(x: position.minX+0, y: position.maxY+0))
+        // window.setFrameOrigin(CGPoint(x: winOrigin.x + 0.0, y: winOrigin.y + 0.0))
+        
         vm.shotFilesOpenDialog()
     }
     
@@ -36,7 +45,7 @@ struct MasterView: View {
             //            let controller = ProfileWindowController(
             //                rootView: ProfileView(vm: ViewModel() )) )
             let vm = ViewModel()
-            let rootView = ProfileView(vm: vm)
+            let rootView = ProfileMainView(vm: vm)
             let controller = ProfileWindowController(rootView: rootView, vm: vm)
             controller.window?.title = "New window"
             controller.showWindow(nil) // nil=sender, not receiver.
