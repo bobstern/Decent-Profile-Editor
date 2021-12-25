@@ -5,21 +5,23 @@
 //  Created by bob on 12/07/2021.
 //
 
-import Foundation
+import AppKit
 
 extension Profile {
     
-    init(fromTcl inputTcl: String, shotContainerPath: String) {
-        self.init(fromTcl: inputTcl)
+    init(fromTcl inputTcl: String, shotContainerPath: String, window: NSWindow) {
+        self.init(fromTcl: inputTcl, window: window)
         self.shotContainerPath = shotContainerPath
     }
     
-    init(fromTcl inputTcl: String) {
+    init(fromTcl inputTcl: String,  window: NSWindow) {
         self.stepDictsArray = stepDictsArrayDecode(from: inputTcl)
         self.shotSteps = decodeShotStepObjects(from: self.stepDictsArray)
         let profileDict = profileDictDecode(from: inputTcl)
         // print("PROFILE DEBUG " + self.profileDict.debugDescription)
         self.profileTitle = profileDict["profile_title"] ?? ""
+        window.title = self.profileTitle // does nothing ????
+        self.window = window // Enables profileTitle.didSet.
         self.volume_track_after_step = profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
         self.profilePressureLimiterRange = profileDict["maximum_pressure_range_advanced"] ?? "0.1"
         self.profileFlowLimiterRange = profileDict["maximum_flow_range_advanced"] ?? "0.1"
@@ -52,7 +54,7 @@ extension Profile {
                 newStep.ramp = .smooth
             }
             
-            print (stepDict)
+//            print (stepDict)
             newStep.pumpVal = rnd(newStep.pumpVal)
             switch newStep.pumpType {
             case .pressure :

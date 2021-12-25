@@ -1,12 +1,13 @@
 //  ViewModel.swift
 //  Decent Profile Editor
 
-import Foundation
+import SwiftUI
 
 
 // let vm = ViewModel.singleton // 1-window only.
 class ViewModel : ObservableObject {
     // static let singleton = ViewModel()
+    weak var window: NSWindow? // window retains vm.
     init () {
     } // was private for singleton single-window version
     
@@ -34,5 +35,12 @@ class ViewModel : ObservableObject {
     
     func setDirty() {
         dirty = true
+    }
+    
+    // Controller deinits immediately, but window persists.
+    // Why does window appear to retain view model?
+    // View model de-inits when window closed.
+    deinit {
+        print("De-init of view model \(self.profile.profileTitle)")
     }
 }

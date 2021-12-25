@@ -4,13 +4,18 @@
 import Cocoa
 
 struct Profile {
+    weak var window: NSWindow? // window retains vm which retains profile.
     var stepDictsArray : Array<[String:String]> = [] // TO TO: convert to computed var.
     var shotContainerPath = ""
     //    var shotSteps : Array<ShotStep> = []
     var shotSteps = [ShotStep()] // init w one empty step.
     var stepsCount : Int {shotSteps.count}
     //    var profileDict : [String:String] = [:]
-    var profileTitle = ""
+    var profileTitle = "" {
+        didSet {
+            window?.title = profileTitle // Ignored if window nil.
+        }
+    }
     var profileNotes = ""
     var author = ""  // Bob
     var volume_track_after_step = "0" // Preinfusion = 2. Key = final_desired_shot_volume_advanced_count_start.
@@ -19,8 +24,7 @@ struct Profile {
     var tank_desired_water_temperature = "0"
     var stopVolume = "0"
     
-    init() {
-    }
+    init() {}
     
     struct ShotStep : Identifiable, Hashable {
         var id = UUID() // Hashable reqd by ForEach(Array( .enumerated
@@ -82,7 +86,7 @@ struct Profile {
             var display : String {
                 switch self {
                 case .zero :
-                    return "      n/a"
+                    return " " // alternately "      n/a"  
                 case .limit:
                     return "    limit "
                 //        case .pressure_limit :
@@ -114,4 +118,4 @@ struct Profile {
         }
         
     } // end ShotStep struct
-}
+} // end Profile struct
