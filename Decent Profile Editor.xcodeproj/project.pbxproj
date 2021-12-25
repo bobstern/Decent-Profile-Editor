@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		527BB09626F72F2E006E138C /* Step View Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527BB09526F72F2E006E138C /* Step View Builder.swift */; };
 		C42260C8265DC71F007800BE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42260C7265DC71F007800BE /* Utilities.swift */; };
-		C43026E42760197F00A15D92 /* Profile Init from tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43026E32760197F00A15D92 /* Profile Init from tcl.swift */; };
+		C43026E42760197F00A15D92 /* Profile Init from Tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43026E32760197F00A15D92 /* Profile Init from Tcl.swift */; };
 		C43BDE79275F465000049E87 /* Profile Encoder to tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */; };
 		C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484EA792751CA1400F4DE6F /* Window Controller.swift */; };
 		C49A3B6C2774800E000D9F66 /* Menu Bar Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A3B6B2774800E000D9F66 /* Menu Bar Actions.swift */; };
@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		527BB09526F72F2E006E138C /* Step View Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Step View Builder.swift"; sourceTree = "<group>"; };
 		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
-		C43026E32760197F00A15D92 /* Profile Init from tcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Init from tcl.swift"; sourceTree = "<group>"; };
+		C43026E32760197F00A15D92 /* Profile Init from Tcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Init from Tcl.swift"; sourceTree = "<group>"; };
 		C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Encoder to tcl.swift"; sourceTree = "<group>"; };
 		C484EA792751CA1400F4DE6F /* Window Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window Controller.swift"; sourceTree = "<group>"; };
 		C49A3B6B2774800E000D9F66 /* Menu Bar Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Menu Bar Actions.swift"; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			children = (
 				C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */,
 				C4CE9E402650B27900CB518B /* Profile & Shot.swift */,
-				C43026E32760197F00A15D92 /* Profile Init from tcl.swift */,
+				C43026E32760197F00A15D92 /* Profile Init from Tcl.swift */,
 				C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */,
 			);
 			path = Model;
@@ -223,7 +223,7 @@
 				C4CE9E3A2650B20800CB518B /* Profile Main View.swift in Sources */,
 				C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,
-				C43026E42760197F00A15D92 /* Profile Init from tcl.swift in Sources */,
+				C43026E42760197F00A15D92 /* Profile Init from Tcl.swift in Sources */,
 				C49A3B6C2774800E000D9F66 /* Menu Bar Actions.swift in Sources */,
 				527BB09626F72F2E006E138C /* Step View Builder.swift in Sources */,
 				C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */,
@@ -381,7 +381,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "sternip.Decent-Profile-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -408,7 +408,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.5.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "sternip.Decent-Profile-Editor";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
