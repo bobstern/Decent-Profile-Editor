@@ -25,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // controller retains vm, but controller de-inits immediately!
     // ViewModel.deinit() print shows vm de-inits when window closed,
     // so window somehow retains vm.
+    // Perhaps window.windowController retains controller which retains vm.
     func newWindow() {
         let vm = ViewModel()
         let rootView = ProfileMainView(vm: vm)

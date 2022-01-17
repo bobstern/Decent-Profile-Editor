@@ -4,16 +4,16 @@
 
 import SwiftUI
 
-struct StepsView : View {
+struct StepsArrayView : View {
     @ObservedObject var vm : ViewModel
     @Binding var deleteStepAlert : Bool
     @Binding var actionIdx : Int?  // used by Delete alert dialog.
     
     var body: some View {
-        ScrollView {
+//        ScrollView {  // better to incl. globals in scrollable frame for side-by-side step comparison.
             ForEach(Array(vm.profile.shotSteps.enumerated()), id: \.element.id) { (idx, step) in
                 
-                StepViewBuilder(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx, idx: idx)
+                StepView(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx, idx: idx)
                 
 /*
 //                // failed to solve ForEach crashing bug when deleting last step:
@@ -109,8 +109,8 @@ struct StepsView : View {
             // onMove works only in List, but List disables editing TextFields.
             //.onMove{moveStep(from: $0, dest: $1) }
             
-        } // end Scroll View
-        .frame(minWidth: 1400).padding(.vertical, 12) // Space above 1st row only.
+//        } // end Scroll View
+        .frame(minWidth: 1400) //.padding(.vertical, 12) // Space above 1st row only.
     } // body
 }
 

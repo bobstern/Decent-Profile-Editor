@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct StepViewBuilder: View {
+struct StepView: View {
     @ObservedObject var vm : ViewModel
     @Binding var deleteStepAlert : Bool
     @Binding var actionIdx : Int?  // used by Delete alert dialog.
+    
     // @State private var stepBindCondx : Binding<ShotStep>
     //    let forEachIndex : Int
     //    var idx : Int {
@@ -27,6 +28,7 @@ struct StepViewBuilder: View {
     //            return $vm.dummyShotStep  //$vm.newProfile.shotSteps[0]
     //        }
     //    }
+    
     let idx: Int
     func stepBindingSafe(idx: Int) -> Binding<Profile.ShotStep> {
         if idx < vm.profile.shotSteps.count {
@@ -36,7 +38,7 @@ struct StepViewBuilder: View {
         }
     }
     
-    @ViewBuilder
+//    @ViewBuilder
     var body: some View {
         let stepBinding = stepBindingSafe(idx: idx) // $vm.newProfile.shotSteps[idx]
         
@@ -120,7 +122,7 @@ struct StepViewBuilder: View {
                 }.buttonStyle(PlainButtonStyle())
                 //                }
                 Spacer()
-            }.multilineTextAlignment(.center).frame(height: 40)
+            }.multilineTextAlignment(.center).frame(height: 20) // Space btw rows.
             // end HStack
             
             // "Swap" button = row alternating w/ preceding HStack:

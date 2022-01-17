@@ -12,7 +12,7 @@ struct ProfileMainView: View {
         //        let newSteps = vm.newProfile.shotSteps
         //        let newBind = $vm.newProfile.shotSteps
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading) {
                 HStack {
                     Button("Open Another Profile") {vm.shotFilesOpenDialog(window: vm.profile.window!)}.padding(.leading, 8)
                     Button("Copy to Clipboard") {_ = vm.profile.encodeTcl(toClipboard: true)}.padding(.leading, 30)
@@ -27,13 +27,16 @@ struct ProfileMainView: View {
                 /// Profile-wide parameters:
                 ProfileGlobalsView(vm: vm)
                 
+                Spacer().frame(height: 20)
                 Divider().frame(height: 1.5).background(Color.black) // height=thickness
+                Spacer().frame(height: 30)
+            
                 
                 /// Shot Steps:
                 if vm.deleteBugBlankDisplay == true {
                     Text("")
                 } else {
-                    StepsView(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx)
+                    StepsArrayView(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx)
                 }
                 
             } // ContentView outermost VStack.
