@@ -23,8 +23,4 @@ struct Profile {
     var profileFlowLimiterRange = "0.1" // key = maximum_flow_range_advanced
     var tank_desired_water_temperature = "0"
     var stopVolume = "0"
-    
-    init() {}
-    
-    
- }// end Profile struct
+ }

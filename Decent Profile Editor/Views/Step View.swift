@@ -57,14 +57,14 @@ struct StepView: View {
                     
                     /// Ramp
                     Picker("", selection: stepBinding.ramp) {
-                        ForEach (ShotStep.Ramp.allCases, id: \.self) { choice in
+                        ForEach (Ramp.allCases, id: \.self) { choice in
                             Text(choice.display)
                         }
                     }.frame(width: 80).padding(.trailing, -8)
                     
                     /// Pump: Pressure or Flow
                     Picker("", selection: stepBinding.pumpType) {
-                        ForEach (ShotStep.PumpTypes.allCases, id: \.self) { choice in
+                        ForEach (PumpTypes.allCases, id: \.self) { choice in
                             Text(choice.rawValue)
                         }
                     }.frame(width: 120, alignment: .trailing)
@@ -79,8 +79,8 @@ struct StepView: View {
                 
                 // MARK: EXIT or LIMIT condition
                 Picker("", selection: stepBinding.exitOrLimitCondx) {
-                    ForEach (ShotStep.ExitOrLimitTypes.allCases, id: \.self) { choice in
-                        if choice != ShotStep.ExitOrLimitTypes.limit {
+                    ForEach (ExitOrLimitTypes.allCases, id: \.self) { choice in
+                        if choice != ExitOrLimitTypes.limit {
                             Text(choice.display)
                         } else {
                             if let pumpObverse = vm.profile.shotSteps[idx].pumpType.obverse {
