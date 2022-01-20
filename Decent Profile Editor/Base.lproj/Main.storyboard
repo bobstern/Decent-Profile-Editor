@@ -66,7 +66,7 @@
                                         </menuItem>
                                         <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                             <connections>
-                                                <action selector="openMenu:" target="Ady-hI-5gd" id="i5N-z6-5gd"/>
+                                                <action selector="menuNew:" target="Ady-hI-5gd" id="p2H-Bo-q4h"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Open Recent" id="tXI-mr-wws">

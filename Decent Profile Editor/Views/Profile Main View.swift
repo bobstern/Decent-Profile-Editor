@@ -30,7 +30,7 @@ struct ProfileMainView: View {
                 Spacer().frame(height: 20)
                 Divider().frame(height: 1.5).background(Color.black) // height=thickness
                 Spacer().frame(height: 30)
-            
+                
                 
                 /// Shot Steps:
                 if vm.deleteBugBlankDisplay == true {
@@ -75,10 +75,12 @@ struct ProfileMainView: View {
                         }
                     )
                 )
-            }
+            } // end .alert(isPresented: $deleteStepAlert)
             
         } // scroll view
+        
     } // body
+    
 } // ContentView View
 
 

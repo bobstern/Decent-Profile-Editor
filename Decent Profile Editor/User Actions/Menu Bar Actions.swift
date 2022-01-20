@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AppKit
 
 // Menu action calls closure in .onCommand view modifier in whichever view is active.
 // .onCommand must specify #selector identifying this class name and one of its functions.
@@ -15,14 +16,15 @@ import Foundation
 // and specify target object as First Responder.
 // Circle is never filled black.
 
+
+// This class is only for menu actions that call .onCommand view modifiers.
+// To call an application method that's not tied to a specific view, ie, a specific profile instance,
+// connect Storyboard menu item to an @IBAction func in AppDelegate.
+
 class MenuActions {
 
     @IBAction func deleteMenu (_ sender: Any) {
         print("DELETE MENU ITEM PRESSED")
-    }
-    
-    @IBAction func openMenu(_ sender: Any) {
-        print("OPEN MENU ITEM PRESSED")
     }
     
     @IBAction func copyTclMenu(_ sender: Any) {
