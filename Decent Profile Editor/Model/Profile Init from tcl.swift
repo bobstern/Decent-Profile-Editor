@@ -43,7 +43,7 @@ extension Profile {
         // stepN was used only for debugging:
         // for (stepN, stepDict) in stepDictsArray.enumerated() {
         for stepDict in stepDictsArray {
-            var newStep = ShotStep(pumpType: Profile.ShotStep.PumpTypes(rawValue: stepDict["pump"]!)!)
+            var newStep = ShotStep(pumpType: ShotStep.PumpTypes(rawValue: stepDict["pump"]!)!)
             
             newStep.descrip = stepDict["name"] ?? ""
             newStep.temp = rnd( stepDict["temperature"]! )
@@ -64,7 +64,7 @@ extension Profile {
             }
             
             if stepDict["exit_if"] == "1" {
-                newStep.exitOrLimitCondx = Profile.ShotStep.ExitOrLimitTypes(rawValue: stepDict["exit_type"]!)!
+                newStep.exitOrLimitCondx = ShotStep.ExitOrLimitTypes(rawValue: stepDict["exit_type"]!)!
             }
             switch newStep.exitOrLimitCondx {
             case .zero :

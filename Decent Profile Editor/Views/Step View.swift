@@ -30,7 +30,7 @@ struct StepView: View {
     //    }
     
     let idx: Int
-    func stepBindingSafe(idx: Int) -> Binding<Profile.ShotStep> {
+    func stepBindingSafe(idx: Int) -> Binding<ShotStep> {
         if idx < vm.profile.shotSteps.count {
             return $vm.profile.shotSteps[idx]
         } else {
@@ -57,14 +57,14 @@ struct StepView: View {
                     
                     /// Ramp
                     Picker("", selection: stepBinding.ramp) {
-                        ForEach (Profile.ShotStep.Ramp.allCases, id: \.self) { choice in
+                        ForEach (ShotStep.Ramp.allCases, id: \.self) { choice in
                             Text(choice.display)
                         }
                     }.frame(width: 80).padding(.trailing, -8)
                     
                     /// Pump: Pressure or Flow
                     Picker("", selection: stepBinding.pumpType) {
-                        ForEach (Profile.ShotStep.PumpTypes.allCases, id: \.self) { choice in
+                        ForEach (ShotStep.PumpTypes.allCases, id: \.self) { choice in
                             Text(choice.rawValue)
                         }
                     }.frame(width: 120, alignment: .trailing)
@@ -79,8 +79,8 @@ struct StepView: View {
                 
                 // MARK: EXIT or LIMIT condition
                 Picker("", selection: stepBinding.exitOrLimitCondx) {
-                    ForEach (Profile.ShotStep.ExitOrLimitTypes.allCases, id: \.self) { choice in
-                        if choice != Profile.ShotStep.ExitOrLimitTypes.limit {
+                    ForEach (ShotStep.ExitOrLimitTypes.allCases, id: \.self) { choice in
+                        if choice != ShotStep.ExitOrLimitTypes.limit {
                             Text(choice.display)
                         } else {
                             if let pumpObverse = vm.profile.shotSteps[idx].pumpType.obverse {

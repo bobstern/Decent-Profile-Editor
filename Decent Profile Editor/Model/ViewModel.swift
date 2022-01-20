@@ -30,7 +30,7 @@ class ViewModel : ObservableObject {
     // @Published var overwriteFileConfirmed = false
     // @Published var currentStep = ShotStep()
     
-    var dummyShotStep = Profile.ShotStep()
+    var dummyShotStep = ShotStep()
 
     
     func setDirty() {

@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		527BB09626F72F2E006E138C /* Step View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527BB09526F72F2E006E138C /* Step View.swift */; };
 		C42260C8265DC71F007800BE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42260C7265DC71F007800BE /* Utilities.swift */; };
-		C43026E42760197F00A15D92 /* Profile Init from Tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43026E32760197F00A15D92 /* Profile Init from Tcl.swift */; };
 		C43BDE79275F465000049E87 /* Profile Encoder to tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */; };
 		C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484EA792751CA1400F4DE6F /* Window Controller.swift */; };
+		C48AE4862798ED8A004FA859 /* Shot Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48AE4852798ED8A004FA859 /* Shot Step.swift */; };
+		C48AE48B2798EFEB004FA859 /* Profile Init from tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48AE48A2798EFEB004FA859 /* Profile Init from tcl.swift */; };
 		C49A3B6C2774800E000D9F66 /* Menu Bar Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A3B6B2774800E000D9F66 /* Menu Bar Actions.swift */; };
 		C49B2A3C2650B98C007C3849 /* System Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49B2A3B2650B98C007C3849 /* System Globals.swift */; };
 		C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E182650B17400CB518B /* AppDelegate.swift */; };
@@ -31,9 +32,10 @@
 /* Begin PBXFileReference section */
 		527BB09526F72F2E006E138C /* Step View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Step View.swift"; sourceTree = "<group>"; };
 		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
-		C43026E32760197F00A15D92 /* Profile Init from Tcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Init from Tcl.swift"; sourceTree = "<group>"; };
 		C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Encoder to tcl.swift"; sourceTree = "<group>"; };
 		C484EA792751CA1400F4DE6F /* Window Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window Controller.swift"; sourceTree = "<group>"; };
+		C48AE4852798ED8A004FA859 /* Shot Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shot Step.swift"; sourceTree = "<group>"; };
+		C48AE48A2798EFEB004FA859 /* Profile Init from tcl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Init from tcl.swift"; sourceTree = "<group>"; };
 		C49A3B6B2774800E000D9F66 /* Menu Bar Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Menu Bar Actions.swift"; sourceTree = "<group>"; };
 		C49B2A3B2650B98C007C3849 /* System Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "System Globals.swift"; sourceTree = "<group>"; };
 		C4C9640F266B900F00CAC5E1 /* Decent Profile EditorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Decent Profile EditorRelease.entitlements"; sourceTree = "<group>"; };
@@ -125,7 +127,8 @@
 			children = (
 				C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */,
 				C4CE9E402650B27900CB518B /* Profile & Shot.swift */,
-				C43026E32760197F00A15D92 /* Profile Init from Tcl.swift */,
+				C48AE4852798ED8A004FA859 /* Shot Step.swift */,
+				C48AE48A2798EFEB004FA859 /* Profile Init from tcl.swift */,
 				C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */,
 			);
 			path = Model;
@@ -213,7 +216,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4CE9E482650B27900CB518B /* Save to File or Clipboard.swift in Sources */,
+				C48AE4862798ED8A004FA859 /* Shot Step.swift in Sources */,
 				C4CE9E4A2650B27900CB518B /* Step Move-Copy-Delete.swift in Sources */,
+				C48AE48B2798EFEB004FA859 /* Profile Init from tcl.swift in Sources */,
 				C4CE9E492650B27900CB518B /* Open Profile Files.swift in Sources */,
 				C4CE9E382650B20800CB518B /* Steps Array View.swift in Sources */,
 				C4CE9E462650B27900CB518B /* Profile & Shot.swift in Sources */,
@@ -223,7 +228,6 @@
 				C4CE9E3A2650B20800CB518B /* Profile Main View.swift in Sources */,
 				C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,
-				C43026E42760197F00A15D92 /* Profile Init from Tcl.swift in Sources */,
 				C49A3B6C2774800E000D9F66 /* Menu Bar Actions.swift in Sources */,
 				527BB09626F72F2E006E138C /* Step View.swift in Sources */,
 				C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */,
