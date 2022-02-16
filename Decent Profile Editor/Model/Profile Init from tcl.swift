@@ -20,8 +20,9 @@ extension Profile {
         let profileDict = profileDictDecode(from: inputTcl)
         // print("PROFILE DEBUG " + self.profileDict.debugDescription)
         self.profileTitle = profileDict["profile_title"] ?? ""
-        window.title = self.profileTitle // does nothing ????
         self.window = window // Enables profileTitle.didSet.
+        self.window!.title = self.profileTitle // does nothing ????
+
         self.volume_track_after_step = profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
         self.profilePressureLimiterRange = profileDict["maximum_pressure_range_advanced"] ?? "0.1"
         self.profileFlowLimiterRange = profileDict["maximum_flow_range_advanced"] ?? "0.1"

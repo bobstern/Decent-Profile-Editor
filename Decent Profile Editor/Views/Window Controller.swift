@@ -26,39 +26,53 @@ import AppKit
 //    }
 //} // error: subclass of NSHostingController must provide initializer init(coder:)
 
-class WindowController<RootView: View>: NSWindowController, ObservableObject {
-    @Published var vm: ViewModel
+class WindowController: NSWindowController {
+    //    @Published var vm: ViewModel
     
+    let vm: ViewModel
     
-    init(rootView: RootView, vm: ViewModel) {
-        self.vm = vm
-        
-        // rootView = SwiftUI ProfileView instantiated in AppDelegate.newWindow():
-        let hostingController = NSHostingController(rootView: rootView)
+    init() {
+        vm = ViewModel()
+        let hostingController = NSHostingController(rootView: ProfileMainView(vm: vm) )
         let win = NSWindow(contentViewController: hostingController) // contentViewController = instance property.
         super.init(window: win) // window = property inherited fm NSWindowController superclass.
         super.window!.setContentSize(NSSize(width: 1400, height: 1000) ) // Initial size accommodates 8 steps.
-        
-        // Windows cascade only vertically; all have same x alignment.
-        // x sets offset from screen left.  y ignored, so set to zero.
-        self.shouldCascadeWindows = true // ignored.
-        super.window!.cascadeTopLeft(from: CGPoint(x: 10, y: 0) ) // Weird position if x=0.
-        
-        // Failed attempts to increase cascade offset:
-        // let winOrigin = window.frame.origin
-        // window.cascadeTopLeft(from: CGPoint(x: position.minX+20, y: position.maxY+20))
-        // window.setFrameTopLeftPoint(CGPoint(x: position.minX+0, y: position.maxY+0))
-        // window.setFrameOrigin(CGPoint(x: winOrigin.x + 0.0, y: winOrigin.y + 0.0))
+        vm.profile.window = self.window
+        vm.shotFilesOpenDialog(window: self.window!)
+        self.showWindow(nil) // nil=sender, not receiver.
     }
+    
+    
+    /*
+     init(rootView: RootView, hostingController: HostingController) {
+     //        self.vm = vm
+     // rootView = SwiftUI ProfileView instantiated in AppDelegate.newWindow():
+     //        let hostingController = NSHostingController(rootView: rootView)
+     let win = NSWindow(contentViewController: hostingController) // contentViewController = instance property.
+     super.init(window: win) // window = property inherited fm NSWindowController superclass.
+     super.window!.setContentSize(NSSize(width: 1400, height: 1000) ) // Initial size accommodates 8 steps.
+     
+     // Windows cascade only vertically; all have same x alignment.
+     // x sets offset from screen left.  y ignored, so set to zero.
+     self.shouldCascadeWindows = true // ignored.
+     super.window!.cascadeTopLeft(from: CGPoint(x: 10, y: 0) ) // Weird position if x=0.
+     
+     // Failed attempts to increase cascade offset:
+     // let winOrigin = window.frame.origin
+     // window.cascadeTopLeft(from: CGPoint(x: position.minX+20, y: position.maxY+20))
+     // window.setFrameTopLeftPoint(CGPoint(x: position.minX+0, y: position.maxY+0))
+     // window.setFrameOrigin(CGPoint(x: winOrigin.x + 0.0, y: winOrigin.y + 0.0))
+     }
+     */
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     /// NSWindowController deinits immediately, but window persists:
-    //    deinit {
-    //        print("Closed WindowController for window \(self.window?.title)")
-    //    }
+    deinit {
+        print("Closed WindowController for window \(self.window?.title)")
+    }
     
 }
 

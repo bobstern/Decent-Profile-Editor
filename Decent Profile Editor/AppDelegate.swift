@@ -7,6 +7,8 @@ import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    var windowControllers = Set<WindowController>()
 
 //    var window: NSWindow! //  Deleted cuz superseded by newWindow()
 
@@ -27,18 +29,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // so window somehow retains vm.
     // Perhaps window.windowController retains controller which retains vm.
     func newWindow() {
-        let vm = ViewModel()
-        let rootView = ProfileMainView(vm: vm)
-        let controller = WindowController(rootView: rootView, vm: vm)
+        let windowController = WindowController()
+//        windowController.showWindow(nil) // nil=sender, not receiver.
+        windowControllers.insert(windowController)
         
-        // Remaining commands can be moved to WindowController.init(),
-        // but OpenDialog() is more conspicuous here:
-        
-        vm.shotFilesOpenDialog(window: controller.window!)
-        controller.showWindow(nil) // nil=sender, not receiver.
+//        let vm = ViewModel()
+//        vm.rootView = ProfileMainView(vm: vm)
+//        vm.hostingController = HostingController(rootView: vm.rootView, vm: vm)
+//        let windowControllerTemp = WindowController(rootView: vm.rootView, vm: vm)
+//
+//        // Remaining commands can be moved to WindowController.init(),
+//        // but OpenDialog() is more conspicuous here:
+//
+//        vm.shotFilesOpenDialog(window: windowControllerTemp.window!)
+//        windowControllerTemp.showWindow(nil) // nil=sender, not receiver.
         
         // controller is local var of this func, so
         // controller now de-inits, but window persists!
     }
 }
 
+
+//class HostingController: NSHostingController<ProfileMainView> {
+//    let vm = ViewModel()
+//    var windowControllerTemp: WindowController<ProfileMainView>!
+//
+//    init() {
+//        let rootView = ProfileMainView(vm: vm)
+//        super.init(rootView: rootView)
+//        windowControllerTemp = WindowController(rootView: rootView, hostingController: self)
+//        vm.shotFilesOpenDialog(window: windowControllerTemp.window!)
+//        windowControllerTemp.showWindow(nil) // nil=sender, not receiver.
+//    }
+//
+//    @objc required dynamic init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    deinit {
+//        print("De-init of HostingController with profile:")
+//        print(self.vm.profile.profileTitle ?? "NIL")
+//    }
+//}

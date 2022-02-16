@@ -7,9 +7,13 @@ import SwiftUI
 // let vm = ViewModel.singleton // 1-window only.
 class ViewModel : ObservableObject {
     // static let singleton = ViewModel()
-    weak var window: NSWindow? // window retains vm.
-    init () {
-    } // was private for singleton single-window version
+//    weak var window: NSWindow? // window retains vm.
+//    var rootView: ProfileMainView!
+//    var hostingController: NSHostingController<ProfileMainView>!
+//    init () {
+//        let rootView = ProfileMainView(vm: self)
+//        let hostingController = NSHostingController(rootView: self.rootView)
+//    } // was private for singleton single-window version
     
     // Initializing to default values reqd to instantiate singleton.
     // Defaults are reasonable for Profile but arbitrary for ShotStep.
