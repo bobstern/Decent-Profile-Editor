@@ -14,7 +14,7 @@ struct ProfileMainView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 HStack {
-                    Button("Open Another Profile") {vm.shotFilesOpenDialog(window: vm.profile.window!)}.padding(.leading, 8)
+                    Button("Open Another Profile") {vm.shotFilesOpenDialog(window: vm.profile.window!)}.padding(.leading, 8) // CRASH if previously initialized w no tcl file because profile=nil. Also fails to de-init previous view model in same window.
                     Button("Copy to Clipboard") {_ = vm.profile.encodeTcl(toClipboard: true)}.padding(.leading, 30)
                     if vm.dirty {
                         Button("**SAVE**") {vm.tclSavePanel()}.padding(.leading, 30).font(Font.system(size: 18, weight: .bold)) //.foregroundColor(.red) // Red distracting.

@@ -6,6 +6,10 @@ import Cocoa
 
 extension ViewModel {
     
+    // When new profile opened in same window, this func replaces previous profile
+    // with new profile in same instance of VM.  So VM will not de-init
+    // until window closed, and deinit() will print name of last displayed profile.
+    
     func shotFilesOpenDialog(window: NSWindow) {
         // var shotTSVandHeadingConcatenated = "" // for export to TSV.
         let openPanel = NSOpenPanel()
