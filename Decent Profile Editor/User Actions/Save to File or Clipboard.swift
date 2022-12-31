@@ -3,7 +3,7 @@
 
 import Cocoa
 
-extension ViewModel {
+extension Model {
 
 func clipboardExportTcl() {
     // let tcl = profileEncodeTcl(self.newProfile)

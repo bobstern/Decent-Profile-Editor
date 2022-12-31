@@ -4,7 +4,7 @@
 import SwiftUI
 
 struct ProfileMainView: View {
-    @ObservedObject var vm : ViewModel
+    @ObservedObject var vm : Model
     @State private var actionIdx : Int?
     @State private var deleteStepAlert = false
     

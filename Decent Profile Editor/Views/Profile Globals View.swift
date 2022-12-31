@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct ProfileGlobalsView: View {
-    @ObservedObject var vm : ViewModel
+    @ObservedObject var vm : Model
 
     var body: some View {
         VStack(alignment: .leading, spacing: 30) {

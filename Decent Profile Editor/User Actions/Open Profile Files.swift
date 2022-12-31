@@ -4,7 +4,7 @@
 
 import Cocoa
 
-extension ViewModel {
+extension Model {
     
     // When new profile opened in same window, this func replaces previous profile
     // with new profile in same instance of VM.  So VM will not de-init

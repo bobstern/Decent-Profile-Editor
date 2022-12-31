@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StepView: View {
-    @ObservedObject var vm : ViewModel
+    @ObservedObject var vm : Model
     @Binding var deleteStepAlert : Bool
     @Binding var actionIdx : Int?  // used by Delete alert dialog.
     

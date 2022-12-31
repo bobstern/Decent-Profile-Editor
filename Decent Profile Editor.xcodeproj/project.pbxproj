@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		527BB09626F72F2E006E138C /* Step View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527BB09526F72F2E006E138C /* Step View.swift */; };
+		C40CA87327BD13EB0000566D /* Window Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40CA87227BD13EB0000566D /* Window Controller.swift */; };
 		C42260C8265DC71F007800BE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42260C7265DC71F007800BE /* Utilities.swift */; };
 		C43BDE79275F465000049E87 /* Profile Encoder to tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */; };
-		C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = C484EA792751CA1400F4DE6F /* Window Controller.swift */; };
 		C48AE4862798ED8A004FA859 /* Shot Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48AE4852798ED8A004FA859 /* Shot Step.swift */; };
 		C48AE48B2798EFEB004FA859 /* Profile Init from tcl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48AE48A2798EFEB004FA859 /* Profile Init from tcl.swift */; };
 		C49A3B6C2774800E000D9F66 /* Menu Bar Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49A3B6B2774800E000D9F66 /* Menu Bar Actions.swift */; };
@@ -20,7 +20,7 @@
 		C4CE9E1D2650B17500CB518B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E1C2650B17500CB518B /* Assets.xcassets */; };
 		C4CE9E202650B17500CB518B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E1F2650B17500CB518B /* Preview Assets.xcassets */; };
 		C4CE9E232650B17500CB518B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4CE9E212650B17500CB518B /* Main.storyboard */; };
-		C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */; };
+		C4CE9E2D2650B1EA00CB518B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E2C2650B1EA00CB518B /* Model.swift */; };
 		C4CE9E362650B20800CB518B /* Profile Globals View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E302650B20800CB518B /* Profile Globals View.swift */; };
 		C4CE9E382650B20800CB518B /* Steps Array View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E332650B20800CB518B /* Steps Array View.swift */; };
 		C4CE9E3A2650B20800CB518B /* Profile Main View.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE9E352650B20800CB518B /* Profile Main View.swift */; };
@@ -32,9 +32,10 @@
 
 /* Begin PBXFileReference section */
 		527BB09526F72F2E006E138C /* Step View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Step View.swift"; sourceTree = "<group>"; };
+		C40CA87227BD13EB0000566D /* Window Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Window Controller.swift"; sourceTree = "<group>"; };
 		C42260C7265DC71F007800BE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Utilities.swift; path = Model/Utilities.swift; sourceTree = "<group>"; };
 		C43BDE78275F465000049E87 /* Profile Encoder to tcl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Profile Encoder to tcl.swift"; sourceTree = "<group>"; };
-		C484EA792751CA1400F4DE6F /* Window Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window Controller.swift"; sourceTree = "<group>"; };
+		C484EA792751CA1400F4DE6F /* Window Controller DISABLED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Window Controller DISABLED.swift"; sourceTree = "<group>"; };
 		C48AE4852798ED8A004FA859 /* Shot Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Shot Step.swift"; sourceTree = "<group>"; };
 		C48AE48A2798EFEB004FA859 /* Profile Init from tcl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Init from tcl.swift"; sourceTree = "<group>"; };
 		C49A3B6B2774800E000D9F66 /* Menu Bar Actions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Menu Bar Actions.swift"; sourceTree = "<group>"; };
@@ -48,7 +49,7 @@
 		C4CE9E222650B17500CB518B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4CE9E242650B17500CB518B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4CE9E252650B17500CB518B /* Decent_Profile_Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Decent_Profile_Editor.entitlements; sourceTree = "<group>"; };
-		C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C4CE9E2C2650B1EA00CB518B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		C4CE9E302650B20800CB518B /* Profile Globals View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Globals View.swift"; sourceTree = "<group>"; };
 		C4CE9E332650B20800CB518B /* Steps Array View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Steps Array View.swift"; sourceTree = "<group>"; };
 		C4CE9E352650B20800CB518B /* Profile Main View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profile Main View.swift"; sourceTree = "<group>"; };
@@ -115,7 +116,8 @@
 		C4CE9E2F2650B20800CB518B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C484EA792751CA1400F4DE6F /* Window Controller.swift */,
+				C484EA792751CA1400F4DE6F /* Window Controller DISABLED.swift */,
+				C40CA87227BD13EB0000566D /* Window Controller.swift */,
 				C4CE9E352650B20800CB518B /* Profile Main View.swift */,
 				C4CE9E302650B20800CB518B /* Profile Globals View.swift */,
 				C4CE9E332650B20800CB518B /* Steps Array View.swift */,
@@ -127,7 +129,7 @@
 		C4CE9E3F2650B27900CB518B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C4CE9E2C2650B1EA00CB518B /* ViewModel.swift */,
+				C4CE9E2C2650B1EA00CB518B /* Model.swift */,
 				C4CE9E402650B27900CB518B /* Profile.swift */,
 				C48AE4852798ED8A004FA859 /* Shot Step.swift */,
 				C4B05D9427990A2B00E3F0D6 /* Enums.swift */,
@@ -222,6 +224,7 @@
 				C48AE4862798ED8A004FA859 /* Shot Step.swift in Sources */,
 				C4CE9E4A2650B27900CB518B /* Step Move-Copy-Delete.swift in Sources */,
 				C48AE48B2798EFEB004FA859 /* Profile Init from tcl.swift in Sources */,
+				C40CA87327BD13EB0000566D /* Window Controller.swift in Sources */,
 				C4CE9E492650B27900CB518B /* Open Profile Files.swift in Sources */,
 				C4CE9E382650B20800CB518B /* Steps Array View.swift in Sources */,
 				C4CE9E462650B27900CB518B /* Profile.swift in Sources */,
@@ -229,11 +232,10 @@
 				C43BDE79275F465000049E87 /* Profile Encoder to tcl.swift in Sources */,
 				C42260C8265DC71F007800BE /* Utilities.swift in Sources */,
 				C4CE9E3A2650B20800CB518B /* Profile Main View.swift in Sources */,
-				C4CE9E2D2650B1EA00CB518B /* ViewModel.swift in Sources */,
+				C4CE9E2D2650B1EA00CB518B /* Model.swift in Sources */,
 				C4CE9E192650B17400CB518B /* AppDelegate.swift in Sources */,
 				C49A3B6C2774800E000D9F66 /* Menu Bar Actions.swift in Sources */,
 				527BB09626F72F2E006E138C /* Step View.swift in Sources */,
-				C484EA7A2751CA1400F4DE6F /* Window Controller.swift in Sources */,
 				C4B05D9527990A2B00E3F0D6 /* Enums.swift in Sources */,
 				C4CE9E362650B20800CB518B /* Profile Globals View.swift in Sources */,
 			);

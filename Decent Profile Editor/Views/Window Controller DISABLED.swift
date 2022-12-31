@@ -6,16 +6,38 @@
 import SwiftUI
 import AppKit
 
-class WindowController<RootView: View>: NSWindowController, NSWindowDelegate {
+//class Window<RootView: View>: NSWindow, ObservableObject {
+//    @Published var vm: ViewModel
+//    init(hostingController: NSHostingController<ProfileMainView>, vm: ViewModel) {
+////    init(rootView: ProfileMainView, vm: ViewModel) {
+//        self.vm = vm
+////      let hostingController = NSHostingController(rootView: rootView)
+//        let viewController = hostingController as NSViewController
+//        super.init(contentViewController: viewController) // error: must call a designated initializer of NSWindow.
+//    }
+//}
+
+//class HostingController: NSHostingController<ProfileMainView>, ObservableObject {
+//    @Published var vm: ViewModel
+//    // var coder: NSCoder = NSCoder()
+//    init(rootView: ProfileMainView, vm: ViewModel) {
+//        self.vm = vm
+//        super.init(rootView: rootView)
+//    }
+//} // error: subclass of NSHostingController must provide initializer init(coder:)
+
+/*
+class WindowController<RootView: View>: NSWindowController, ObservableObject {
+    @Published var vm: ViewModel
     
-    let win: NSWindow!
     
-    init(rootView: RootView) {
-        // rootView = SwiftUI ProfileMainView instantiated in ViewModel init.
+    init(rootView: RootView, vm: ViewModel) {
+        self.vm = vm
+        
+        // rootView = SwiftUI ProfileView instantiated in AppDelegate.newWindow():
         let hostingController = NSHostingController(rootView: rootView)
-        win = NSWindow(contentViewController: hostingController) // contentViewController = instance property.
+        let win = NSWindow(contentViewController: hostingController) // contentViewController = instance property.
         super.init(window: win) // window = property inherited fm NSWindowController superclass.
-        win.delegate = self
         super.window!.setContentSize(NSSize(width: 1400, height: 1000) ) // Initial size accommodates 8 steps.
         
         // Windows cascade only vertically; all have same x alignment.
@@ -34,17 +56,10 @@ class WindowController<RootView: View>: NSWindowController, NSWindowDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // NSWindowDelegate:
-    func windowWillClose(_ notification: Notification) {
-        print("Window will close.")
-        self.dismissController(nil)
-    }
-    
-// When window, closes, func windowWillClose is called,
-// but dismiss does not de-init controller.
-        deinit {
-            print("De-init WindowController for window \(self.win.title)")
-        }
+    /// NSWindowController deinits immediately, but window persists:
+    //    deinit {
+    //        print("Closed WindowController for window \(self.window?.title)")
+    //    }
     
 }
 

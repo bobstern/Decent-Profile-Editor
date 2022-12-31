@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct StepsArrayView : View {
-    @ObservedObject var vm : ViewModel
+    @ObservedObject var vm : Model
     @Binding var deleteStepAlert : Bool
     @Binding var actionIdx : Int?  // used by Delete alert dialog.
     
@@ -15,7 +15,18 @@ struct StepsArrayView : View {
                 
                 StepView(vm: vm, deleteStepAlert: $deleteStepAlert, actionIdx: $actionIdx, idx: idx)
                 
-/*
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                /*
 //                // failed to solve ForEach crashing bug when deleting last step:
 //                if idx < vm.newProfile.stepsCount {
                 

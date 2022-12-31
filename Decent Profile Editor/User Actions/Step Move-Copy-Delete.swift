@@ -3,7 +3,7 @@
 
 import Foundation
 
-extension ViewModel {
+extension Model {
 
 func duplicateStep(atIndex idx : Int) {
     let originalStep = self.profile.shotSteps[idx]
