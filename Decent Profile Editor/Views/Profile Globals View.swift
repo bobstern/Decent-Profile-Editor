@@ -20,7 +20,7 @@ struct ProfileGlobalsView: View {
                 Text("Track volume AFTER step:").padding(.trailing, -4)
                 TextField("", text: $vm.profile.volume_track_after_step).multilineTextAlignment(.center).frame(width: 40)
                 Spacer()
-                Text("Flow limiter onset range:").padding(.trailing, -4)
+                Text("Flow range above Limit:").padding(.trailing, -4)
                 TextField("", text: $vm.profile.profileFlowLimiterRange).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
             }//.padding(.vertical, 20)
             
@@ -28,7 +28,7 @@ struct ProfileGlobalsView: View {
                 Text("Stop at Volume (0 = Off):").padding(.trailing, 4)//.frame(width: 250, alignment: .trailing)
                 TextField("", text: $vm.profile.stopVolume).multilineTextAlignment(.center).frame(width: 40)
                 Spacer()
-                Text("Pressure limiter onset range:").frame(width: 300, alignment: .trailing).padding(.trailing, -4)
+                Text("Pressure range above Limit:").frame(width: 300, alignment: .trailing).padding(.trailing, -4)
                 TextField("", text: $vm.profile.profilePressureLimiterRange).multilineTextAlignment(.center).frame(width: 50).padding(.trailing, 50)
             }//.padding(.vertical, 20)
         }

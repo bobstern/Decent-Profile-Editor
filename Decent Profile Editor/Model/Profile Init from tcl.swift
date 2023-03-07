@@ -17,6 +17,7 @@ extension Profile {
     init(fromTcl inputTcl: String,  window: NSWindow) {
         self.stepDictsArray = stepDictsArrayDecode(from: inputTcl)
         self.shotSteps = decodeShotStepObjects(from: self.stepDictsArray)
+        
         let profileDict = profileDictDecode(from: inputTcl)
         // print("PROFILE DEBUG " + self.profileDict.debugDescription)
         self.profileTitle = profileDict["profile_title"] ?? ""
@@ -107,33 +108,6 @@ extension Profile {
     }
     
     
-    func profileTitleDecode(from inputTcl: String) -> String {
-        var titleDelimiter1 : String // components delimiter.
-        var titleDelimiter2 : Character // split delimiter.
-        if inputTcl.contains(Character("\t")) {
-            titleDelimiter1 = "\tprofile_title " // Shot file.
-        } else {
-            titleDelimiter1 = "\nprofile_title "  // tcl Profile file.
-        }
-        let titleDelimitedArray = inputTcl.components(separatedBy: titleDelimiter1)
-        guard titleDelimitedArray.count == 2 else {
-            print("Empty Title for shot or profile.")
-            return ""
-            
-        }
-        var titlePrefix = titleDelimitedArray[1] // 0-based; retains text after delimiter.
-        if titlePrefix.hasPrefix("{") {
-            titlePrefix.removeFirst()
-            titleDelimiter2 = "}"
-        } else {
-            titleDelimiter2 = "\n"
-        }
-        let titlePrefixArray = titlePrefix.split(separator: titleDelimiter2)
-        return String(titlePrefixArray[0])
-        // print ("Title = \(ShotInputFile.profileTitle)")
-    } // end profileTitle()
-    
-    
     func stepDictsArrayDecode(from inputTcl : String) -> Array<[String:String]> {
         // get Profile Parameters as array of steps, where
         // each step is a dict of parameters:
@@ -201,9 +175,9 @@ extension Profile {
         var multiWordVal = ""
         
         // Shot param lines begin w tab; ignored in profile:
-        let tempStr = inputTcl.replacingOccurrences(of: "\t", with: "")
+        var tempStr = inputTcl.replacingOccurrences(of: "\t", with: "")
         
-        // Delete suffix from shot; ignored in profile:
+        // Delete suffix from .shot filetype; ignored in profile (.tcl) filetype:
         tempArr = tempStr.components(separatedBy: "\n}\nmachine {")
         // print("AA " + tempArr.debugDescription)
         // keep prefix:
@@ -214,21 +188,45 @@ extension Profile {
         tempArr = tempArr[1].components(separatedBy: "}}\n")
         // print("CC " + tempArr.debugDescription)
         if tempArr.count < 2  {return emptyDict}
-        
         // keep suffix:
-        // \n delimits dict elements:
-        let dictArr = tempArr[1].components(separatedBy: "\n")
-        for dictStr in dictArr {
-            var dictWords = dictStr.components(separatedBy: " ")
-            if dictWords.count < 2 {break}
-            
-            if dictWords.count == 2 {
-                profileDict[dictWords[0] ] = dictWords[1]
+        tempStr = tempArr[1]
+        
+        // Extract "profile_notes" before other keys because it is the only multi-line value.
+        // If its value is only one word, it will be ignored here and
+        // decoded later with the other profile dict keys.
+        tempArr = tempStr.components(separatedBy: "\nprofile_notes {")
+        tempStr = tempArr[0]
+        if tempArr.count > 2 {
+            print("ERROR: profile_notes appears twice in tcl !!")
+        }
+        if tempArr.count == 2 {
+            tempArr = tempArr[1].split(separator: "}", maxSplits: 1).map{String($0)} // map converts substring to string.
+            if tempArr.count == 1 {
+                print("ERROR: profile_notes has unmatched opening brace.")
             } else {
-                let dictKey = dictWords[0]
-                dictWords = dictStr.components(separatedBy: "{")
-                if dictWords.count != 2 {break}
-                multiWordVal = dictWords[1]
+                profileDict["profile_notes"] = tempArr[0]
+                tempStr += tempArr[1]
+            }
+        }
+        
+        
+        // \n delimits dict elements:
+        let profileLinesArray = tempStr.components(separatedBy: "\n")
+        for profileLine in profileLinesArray {
+            var profileLineWords = profileLine.components(separatedBy: " ")
+            if profileLineWords.count < 2 {break}
+            
+            if profileLineWords.count == 2 {
+                profileDict[profileLineWords[0] ] = profileLineWords[1]
+            } else {
+                // Value presumed to be multiple words enclosed in braces on a single line.
+                // Fails, and ignores all subsequent key/value pairs,
+                // if closing brace is on a subsequent line, which is
+                // possible only for a multi-line "profile_notes".
+                let dictKey = profileLineWords[0]
+                profileLineWords = profileLine.components(separatedBy: "{")
+                if profileLineWords.count != 2 {break}
+                multiWordVal = profileLineWords[1]
                 guard multiWordVal.popLast() == "}" else {break}
                 profileDict[dictKey] = multiWordVal
             }
@@ -237,3 +235,33 @@ extension Profile {
     }
     
 }
+
+
+/*
+// Not called anywhere!  Instead, decoded like all other profile dicts.
+func profileTitleDecode(from inputTcl: String) -> String {
+    var titleDelimiter1 : String // components delimiter.
+    var titleDelimiter2 : Character // split delimiter.
+    if inputTcl.contains(Character("\t")) {
+        titleDelimiter1 = "\tprofile_title " // Shot file.
+    } else {
+        titleDelimiter1 = "\nprofile_title "  // tcl Profile file.
+    }
+    let titleDelimitedArray = inputTcl.components(separatedBy: titleDelimiter1)
+    guard titleDelimitedArray.count == 2 else {
+        print("Empty Title for shot or profile.")
+        return ""
+        
+    }
+    var titlePrefix = titleDelimitedArray[1] // 0-based; retains text after delimiter.
+    if titlePrefix.hasPrefix("{") {
+        titlePrefix.removeFirst()
+        titleDelimiter2 = "}"
+    } else {
+        titleDelimiter2 = "\n"
+    }
+    let titlePrefixArray = titlePrefix.split(separator: titleDelimiter2)
+    return String(titlePrefixArray[0])
+    // print ("Title = \(ShotInputFile.profileTitle)")
+} // end profileTitle()
+*/
