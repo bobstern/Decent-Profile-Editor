@@ -46,10 +46,9 @@ extension Profile {
     func encodeStepTcl(_ step: ShotStep) -> String {
         var tcl = "{"
         tcl += "name {\(step.descrip)} "
-        tcl += "transition \(step.ramp.rawValue) "
+        tcl += "transition \(step.ramp) "
         tcl += "temperature \(step.temp) "
         tcl += "pump \(step.pumpType.rawValue) \(step.pumpType.rawValue) \(step.pumpVal) "
-        tcl += "transition \(step.ramp) "
         tcl += "seconds \(step.time) "
         
         switch step.exitOrLimitCondx {

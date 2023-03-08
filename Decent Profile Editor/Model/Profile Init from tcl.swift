@@ -19,13 +19,13 @@ extension Profile {
         self.shotSteps = decodeShotStepObjects(from: self.stepDictsArray)
         
         let profileDict = profileDictDecode(from: inputTcl)
-        // print("PROFILE DEBUG " + self.profileDict.debugDescription)
+        print("PROFILE DEBUG " + profileDict.debugDescription)
         self.profileTitle = profileDict["profile_title"] ?? ""
         window.title = self.profileTitle // does nothing ????
         self.window = window // Enables profileTitle.didSet.
         self.volume_track_after_step = profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
-        self.profilePressureLimiterRange = profileDict["maximum_pressure_range_advanced"] ?? "0.1"
-        self.profileFlowLimiterRange = profileDict["maximum_flow_range_advanced"] ?? "0.1"
+        self.profilePressureLimiterRange = profileDict["maximum_pressure_range_advanced"] ?? "0.0"
+        self.profileFlowLimiterRange = profileDict["maximum_flow_range_advanced"] ?? "0.0"
         self.stopVolume = profileDict["final_desired_shot_volume_advanced"] ?? "0"
         //        self.profileDict = profileDictDecode(from: inputTcl)
         //        // print("PROFILE DEBUG " + self.profileDict.debugDescription)
@@ -202,7 +202,7 @@ extension Profile {
         if tempArr.count == 2 {
             tempArr = tempArr[1].split(separator: "}", maxSplits: 1).map{String($0)} // map converts substring to string.
             if tempArr.count == 1 {
-                print("ERROR: profile_notes has unmatched opening brace.")
+                tempStr += tempArr[0] // No text between braces pair.
             } else {
                 profileDict["profile_notes"] = tempArr[0]
                 tempStr += tempArr[1]
