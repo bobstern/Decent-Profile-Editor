@@ -14,26 +14,59 @@ extension Profile {
         self.shotContainerPath = shotContainerPath
     }
     
-    init(fromTcl inputTcl: String,  window: NSWindow) {
-        self.stepDictsArray = stepDictsArrayDecode(from: inputTcl)
-        self.shotSteps = decodeShotStepObjects(from: self.stepDictsArray)
+    init(fromTcl inputTcl: String, window: NSWindow) {
+        // get Profile Parameters as array of steps, where
+        // each step is a dict of parameters:
+        let splitArray = inputTcl.components(separatedBy: "advanced_shot {{")
+        guard splitArray.count == 2 else {exit(0)}
         
-        let profileDict = profileDictDecode(from: inputTcl)
-        print("PROFILE DEBUG " + profileDict.debugDescription)
-        self.profileTitle = profileDict["profile_title"] ?? ""
+        // Discard splitArray[0] = tcl preceding "advanced_shot":
+        // nil if .tcl;
+        // realtime samples if .shot:
+        var stepsTclStr = splitArray[1]
+        let splitArray2 = stepsTclStr.components(separatedBy: "}}\n")
+        stepsTclStr = splitArray2[0]
+        
+// Profile Global Params are between shot steps and machine params, so
+// delete machine settings at end of .shot files.
+// Also delete cosmetic tabs in .shot files.
+        let profileGlobalTcl = splitArray2[1].components(separatedBy: "\n}\nmachine {")[0].replacingOccurrences(of: "\t", with: "")
+
+//
+/// decode array of Shot Step objects from stepsTclStr:
+//
+        let stepsTclArray = stepsTclStr.components(separatedBy: "} {")
+        
+        var stepDictsArray : Array<[String:String]> = []
+        for step in stepsTclArray {
+            stepDictsArray.append(decodeStepTCLtoDict(kvTxt: step))
+        }
+        self.shotSteps = decodeShotStepObjects(from: stepDictsArray)
+        
+//
+/// decode global properties of profile from profileGlobalTclStr:
+//
+        self.profileTitle = decodeProfileValue(forKey: "profile_title", fromTcl: profileGlobalTcl) ?? ""
         window.title = self.profileTitle // does nothing ????
         self.window = window // Enables profileTitle.didSet.
-        self.volume_track_after_step = profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
-        self.profilePressureLimiterRange = profileDict["maximum_pressure_range_advanced"] ?? "0.0"
-        self.profileFlowLimiterRange = profileDict["maximum_flow_range_advanced"] ?? "0.0"
-        self.stopVolume = profileDict["final_desired_shot_volume_advanced"] ?? "0"
-        //        self.profileDict = profileDictDecode(from: inputTcl)
-        //        // print("PROFILE DEBUG " + self.profileDict.debugDescription)
-        //        self.profileTitle = self.profileDict["profile_title"] ?? ""
-        //        self.volume_track_after_step = self.profileDict["final_desired_shot_volume_advanced_count_start"] ?? "0" // Preinfusion = 2
-        //        self.press_dampen_range = self.profileDict["maximum_pressure_range_advanced"] ?? "0.1"
-        //        self.flow_dampen_range = self.profileDict["maximum_flow_range_advanced"] ?? "0.1"
-        //        self.stopVolume = self.profileDict["final_desired_shot_volume_advanced"] ?? "0"
+        
+        self.volume_track_after_step = decodeProfileValue(forKey:"final_desired_shot_volume_advanced_count_start", fromTcl: profileGlobalTcl) ?? "0" // Preinfusion = step 2.
+        self.profilePressureLimiterRange = decodeProfileValue(forKey:"maximum_pressure_range_advanced", fromTcl: profileGlobalTcl) ?? "0.0"
+        self.profileFlowLimiterRange = decodeProfileValue(forKey:"maximum_flow_range_advanced", fromTcl: profileGlobalTcl) ?? "0.0"
+        self.stopVolume = decodeProfileValue(forKey:"final_desired_shot_volume_advanced", fromTcl: profileGlobalTcl) ?? "0"
+    }
+    
+    
+    func decodeProfileValue(forKey key: String, fromTcl tcl: String) -> String? {
+        let splitArray = tcl.components(separatedBy: "\n" + key + " ")
+        guard splitArray.count == 2 else {return nil}
+        var splitStr = splitArray[1]
+        if splitStr.first != "{" {
+            return splitStr.components(separatedBy: "\n")[0]
+        } else {
+            splitStr = String(splitStr.dropFirst(1))
+            return splitStr.components(separatedBy: "}")[0]
+        }
     }
     
     
@@ -92,18 +125,6 @@ extension Profile {
             
             // print("Step \(stepN);  Pump: \(newStep.pumpDisplay);  Exit: \(newStep.exitDisplay)")
         }
-        
-        // print(shotStepObjectArray)
-        //
-        // Export as tab-delimited (TSV) format:
-        //
-        
-        //        var tempShotTSV = "Description\tStep\tTran-sition\tTemp\tPump\tTime\tExit\n"
-        //        for (stepN, shotStep) in shotStepObjectArray.enumerated() {
-        //            tempShotTSV += "\(shotStep.descrip)\t\(String(stepN+1))\t\(shotStep.ramp.rawValue)\t\(shotStep.temp)\t\(shotStep.pumpDisplay)\t\(shotStep.time)\t\(shotStep.exitDisplay)\n"
-        //        }
-        //        tempShotTSV += "\n" // 2 newlines delimit end of table for Nisus macro.
-        //        return tempShotTSV
         return shotStepObjectArray
     }
     
@@ -122,13 +143,13 @@ extension Profile {
         
         var tempStepDictsArray = Array<[String:String]>()
         for step in steps_tcl_Array {
-            tempStepDictsArray.append(decodeTCLtoDict(kvTxt: step))
+            tempStepDictsArray.append(decodeStepTCLtoDict(kvTxt: step))
         }
         return tempStepDictsArray
     }
     
     
-    func decodeTCLtoDict(kvTxt: String ) -> [String:String] {
+    func decodeStepTCLtoDict(kvTxt: String ) -> [String:String] {
         var idxAfter : String.Index
         var idxBefore : String.Index
         var key1 = ""
@@ -168,100 +189,4 @@ extension Profile {
         return kvDict
     }
     
-    func profileDictDecode(from inputTcl : String) -> [String:String] {
-        let emptyDict = [String:String]()
-        var profileDict  = [String:String]()
-        var tempArr : [String] = []
-        var multiWordVal = ""
-        
-        // Shot param lines begin w tab; ignored in profile:
-        var tempStr = inputTcl.replacingOccurrences(of: "\t", with: "")
-        
-        // Delete suffix from .shot filetype; ignored in profile (.tcl) filetype:
-        tempArr = tempStr.components(separatedBy: "\n}\nmachine {")
-        // print("AA " + tempArr.debugDescription)
-        // keep prefix:
-        tempArr = tempArr[0].components(separatedBy: "advanced_shot {{")
-        // print("BB " + tempArr.debugDescription)
-        if tempArr.count != 2 {return emptyDict}
-        // keep suffix:
-        tempArr = tempArr[1].components(separatedBy: "}}\n")
-        // print("CC " + tempArr.debugDescription)
-        if tempArr.count < 2  {return emptyDict}
-        // keep suffix:
-        tempStr = tempArr[1]
-        
-        // Extract "profile_notes" before other keys because it is the only multi-line value.
-        // If its value is only one word, it will be ignored here and
-        // decoded later with the other profile dict keys.
-        tempArr = tempStr.components(separatedBy: "\nprofile_notes {")
-        tempStr = tempArr[0]
-        if tempArr.count > 2 {
-            print("ERROR: profile_notes appears twice in tcl !!")
-        }
-        if tempArr.count == 2 {
-            tempArr = tempArr[1].split(separator: "}", maxSplits: 1).map{String($0)} // map converts substring to string.
-            if tempArr.count == 1 {
-                tempStr += tempArr[0] // No text between braces pair.
-            } else {
-                profileDict["profile_notes"] = tempArr[0]
-                tempStr += tempArr[1]
-            }
-        }
-        
-        
-        // \n delimits dict elements:
-        let profileLinesArray = tempStr.components(separatedBy: "\n")
-        for profileLine in profileLinesArray {
-            var profileLineWords = profileLine.components(separatedBy: " ")
-            if profileLineWords.count < 2 {break}
-            
-            if profileLineWords.count == 2 {
-                profileDict[profileLineWords[0] ] = profileLineWords[1]
-            } else {
-                // Value presumed to be multiple words enclosed in braces on a single line.
-                // Fails, and ignores all subsequent key/value pairs,
-                // if closing brace is on a subsequent line, which is
-                // possible only for a multi-line "profile_notes".
-                let dictKey = profileLineWords[0]
-                profileLineWords = profileLine.components(separatedBy: "{")
-                if profileLineWords.count != 2 {break}
-                multiWordVal = profileLineWords[1]
-                guard multiWordVal.popLast() == "}" else {break}
-                profileDict[dictKey] = multiWordVal
-            }
-        }
-        return profileDict
-    }
-    
 }
-
-
-/*
-// Not called anywhere!  Instead, decoded like all other profile dicts.
-func profileTitleDecode(from inputTcl: String) -> String {
-    var titleDelimiter1 : String // components delimiter.
-    var titleDelimiter2 : Character // split delimiter.
-    if inputTcl.contains(Character("\t")) {
-        titleDelimiter1 = "\tprofile_title " // Shot file.
-    } else {
-        titleDelimiter1 = "\nprofile_title "  // tcl Profile file.
-    }
-    let titleDelimitedArray = inputTcl.components(separatedBy: titleDelimiter1)
-    guard titleDelimitedArray.count == 2 else {
-        print("Empty Title for shot or profile.")
-        return ""
-        
-    }
-    var titlePrefix = titleDelimitedArray[1] // 0-based; retains text after delimiter.
-    if titlePrefix.hasPrefix("{") {
-        titlePrefix.removeFirst()
-        titleDelimiter2 = "}"
-    } else {
-        titleDelimiter2 = "\n"
-    }
-    let titlePrefixArray = titlePrefix.split(separator: titleDelimiter2)
-    return String(titlePrefixArray[0])
-    // print ("Title = \(ShotInputFile.profileTitle)")
-} // end profileTitle()
-*/
