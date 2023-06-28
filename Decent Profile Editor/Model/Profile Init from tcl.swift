@@ -30,7 +30,9 @@ extension Profile {
 // Profile Global Params are between shot steps and machine params, so
 // delete machine settings at end of .shot files.
 // Also delete cosmetic tabs in .shot files.
-        let profileGlobalTcl = splitArray2[1].components(separatedBy: "\n}\nmachine {")[0].replacingOccurrences(of: "\t", with: "")
+// profileGlobalTcl must begin with \n cuz reqd as delimiter
+// in func decodeProfileValue(forKey: fromTcl:)
+        let profileGlobalTcl = "\n" + splitArray2[1].components(separatedBy: "\n}\nmachine {")[0].replacingOccurrences(of: "\t", with: "")
 
 //
 /// decode array of Shot Step objects from stepsTclStr:
